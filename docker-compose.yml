@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  lims_django_backend:
+    env_file:
+      - ./backend/.env
+    # Since we have a Dockerfile, we don't need to specify the line below. It is commented out
+    # image: node: 12.18.3
+    container_name: lims_django_backend
+    # build allows us to build from our own Dockerfile instead of a default Image like node:8.11.1
+    # build references the Dockerfile in the root directory
+    build: ./backend
+    command: npm start
+    working_dir: /usr/src/backend
+    # These environmental variables are referenced by the connection in server.js through a process.env
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: face-recognition-database-docker
+      POSTGRES_HOST: postgres
+      REDIS_URL: redis://redis-cache
+    # The first 3000 represents the port on your local machine, the : represents forwarding, and second 3000 represents the port of the container
+    ports:
+      - "3000:3000"
+    # volumes allows access to the file system of the container
+    # ./ represents the directory of your local machine, the : represents forwarding, and /usr/src/backend represents the directory of the container
+    # This enables changes made on your local machine to populate in the container automatically
+    volumes:
+      - ./backend:/usr/src/backend
+      # - /usr/src/backend/node_modules
+
+  # Redis Database
+  lims_redis_cache:
+    image: redis
+    container_name: lims_redis_cache
+    command: redis-server
+    ports:
+      - "6379:6379"
+
+  # PostgreSQL Database
+  lims_postgres_db:
+    # To connect the back-end-api service to our database, we need to include the environment below in both our database service and back-end-api service
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: face-recognition-database-docker
+      POSTGRES_HOST: postgres
+    # Telling Docker to run whatever is in the postgres directory on our local machine. In this case, we will get tables generated for our database in the Docker container
+    build: ./backend/postgres
+    # The first 5432 represents the port on your local machine, the : represents forwarding, and the second 5432 represents the port of the container
+    ports:
+      - "5432:5432"
+
+  # Front-end React User Interface
+  lims_react_frontend:
+    env_file:
+    - ./frontend/.env
+    container_name: lims_react_frontend
+    build: ./frontend
+    command: npm start
+    working_dir: /usr/src/frontend
+    ports:
+      - "3001:3001"
+    stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+        - ./frontend:/usr/src/frontend
+        # - /usr/src/frontend/node_modules
