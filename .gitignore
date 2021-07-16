@@ -2,7 +2,7 @@
 
 # Environments
 .env
-env/
+venv/
 
 # React Dependencies
 node_modules
