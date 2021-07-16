@@ -28,7 +28,7 @@ interface IAppProps {
 
 const mapStateToProps = (state: IAppState) => {
   return {
-    companies: state.requestCompanies.users,
+    companies: state.requestCompanies.companies,
     isPending: state.requestCompanies.isPending,
     error: state.requestCompanies.error
   }
@@ -36,7 +36,7 @@ const mapStateToProps = (state: IAppState) => {
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<IAppState, void, AnyAction>) => {
   return {
-    onRequestOfUsers: () => dispatch(requestCompanies())
+    onRequestOfCompanies: () => dispatch(requestCompanies())
   }
 }
 

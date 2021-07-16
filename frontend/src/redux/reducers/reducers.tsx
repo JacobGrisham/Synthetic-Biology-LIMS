@@ -6,7 +6,7 @@ import {
 
 const initialStateCompanies = {
   isPending: false,
-  compaines: [],
+  companies: [],
   error: ''
 }
 
