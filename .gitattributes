@@ -1,0 +1,44 @@
+# Included the line below to more accurately display language stats for Github. Currently, the language stat for this repo is html, but that's only because of the jest code coverage in the lcov-report directory.
+# Discussion here: https://github.com/github/linguist/blob/master/docs/overrides.md
+
+*.html linguist-generated
+
+# Best Practices for Collaboration
+# Article: https://rehansaeed.com/gitattributes-best-practices/
+
+# Set default behavior to automatically normalize line endings.
+* text=auto
+
+# Force batch scripts to always use CRLF line endings so that if a repo is accessed
+# in Windows via a file share from Linux, the scripts will work.
+*.{cmd,[cC][mM][dD]} text eol=crlf
+*.{bat,[bB][aA][tT]} text eol=crlf
+
+# Force bash scripts to always use LF line endings so that if a repo is accessed
+# in Unix via a file share from Windows, the scripts will work.
+*.sh text eol=lf
+
+# Large File System (LFS) stores binary files in a separate file system. When you clone a repository, you only download the latest copies of the binary files and not every single changed version of them. Furthermore, every time you check-in a change to a binary file, you've now got both files saved in Git's history. Over time this bloats the repository and makes cloning it slow.
+# Archives
+*.7z filter=lfs diff=lfs merge=lfs -text
+*.br filter=lfs diff=lfs merge=lfs -text
+*.gz filter=lfs diff=lfs merge=lfs -text
+*.tar filter=lfs diff=lfs merge=lfs -text
+*.zip filter=lfs diff=lfs merge=lfs -text
+
+# Documents
+*.pdf filter=lfs diff=lfs merge=lfs -text
+
+# Images
+*.gif filter=lfs diff=lfs merge=lfs -text
+*.ico filter=lfs diff=lfs merge=lfs -text
+*.jpg filter=lfs diff=lfs merge=lfs -text
+*.png filter=lfs diff=lfs merge=lfs -text
+*.psd filter=lfs diff=lfs merge=lfs -text
+*.webp filter=lfs diff=lfs merge=lfs -text
+
+# Fonts
+*.woff2 filter=lfs diff=lfs merge=lfs -text
+
+# Other
+*.exe filter=lfs diff=lfs merge=lfs -text 
