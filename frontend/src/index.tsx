@@ -1,7 +1,6 @@
 // React
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './assets/index.css';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 // Redux
