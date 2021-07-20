@@ -23,6 +23,7 @@ jobs:
 # Referenced: https://circleci.com/blog/continuous-integration-for-django-projects/
 # Referenced: https://github.com/CircleCI-Public/circleci-demo-python-django/blob/master/.circleci/config.yml
   test_django:
+      working_directory: ~/
       docker:
         - image: circleci/python:3.6
         #   environment:
@@ -31,6 +32,8 @@ jobs:
         # environment:
         #   POSTGRES_USER: root
         #   POSTGRES_DB: circle_test
+      environment:
+        SECRET_KEY: $SECRET_KEY
       steps:
         - checkout
         - avoid_non-deployment_updates
@@ -59,7 +62,7 @@ jobs:
 
   # Referenced: https://circleci.com/blog/continuously-testing-react-applications-with-jest-and-enzyme/
   test_react:
-    working_directory: ~/redux-async
+    working_directory: ~/frontend
     docker:
       - image: circleci/node:8
     steps:
@@ -80,7 +83,7 @@ jobs:
           name: Run Tests
           command: npm test
       - store_test_results:
-          path: ./frontend/tests/jest-reports
+          path: ./frontend/src/tests/jest-reports
       - store_artifacts: # stores logs, binaries, etc. so that they are accessible by the app in later runs
           path: ./frontend/tests/coverage/lcov-report
 
@@ -92,7 +95,7 @@ jobs:
       - avoid_non-deployment_updates
       # run commands to generate the coverage result
       - coverage-reporter/send_report:
-          coverage-reports: 'coverage/lcov.info'
+          coverage-reports: 'frontend/src/tests/coverage/lcov.info'
           project-token: $CODACY_PROJECT_TOKEN
   
   # deploy_AWS job: goes here
