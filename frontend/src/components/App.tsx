@@ -1,7 +1,6 @@
 // React
-import React from "react";
-import '../assets/App.css';
-import Home from "./Home"
+import React from 'react';
+import Home from './Home'
 import ErrorBoundary from './ErrorBoundary'
 // Redux
 import { AnyAction } from 'redux';
