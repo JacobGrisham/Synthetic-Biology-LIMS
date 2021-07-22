@@ -32,8 +32,6 @@ jobs:
         # environment:
         #   POSTGRES_USER: root
         #   POSTGRES_DB: circle_test
-      environment:
-        SECRET_KEY: $SECRET_KEY
       steps:
         - checkout
         - restore_cache:
@@ -52,6 +50,8 @@ jobs:
               - "venv"
         - run:
             name: Running tests
+            environment:
+              SECRET_KEY: $SECRET_KEY
             command: |
               source venv/bin/activate
               python3 manage.py test
