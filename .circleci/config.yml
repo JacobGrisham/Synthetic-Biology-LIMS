@@ -50,12 +50,12 @@ jobs:
               - "venv"
         - run:
             name: Running tests
-            command: echo $SECRET_KEY
-            environment:
-              SECRET_KEY: $SECRET_KEY
             command: |
+              echo $SECRET_KEY
               source venv/bin/activate
               python3 manage.py test
+            environment:
+              SECRET_KEY: $SECRET_KEY
         - store_test_results:
             path: ./backend/tests/test-reports/pytest
         - store_artifacts: # stores logs, binaries, etc. so that they are accessible by the app in later runs
