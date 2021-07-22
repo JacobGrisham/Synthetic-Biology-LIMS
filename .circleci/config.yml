@@ -53,6 +53,7 @@ jobs:
             command: |
               touch .env
               echo SECRET_KEY=$SECRET_KEY >> .env
+              echo DB_PASSWORD=$DB_PASSWORD >> .env
         - run:
             name: Running tests
             command: |
