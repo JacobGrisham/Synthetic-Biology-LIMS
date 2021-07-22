@@ -51,7 +51,7 @@ jobs:
         - run:
             name: Configuring Environment
             command: |
-            echo $SECRET_KEY
+              echo $SECRET_KEY
         - run:
             name: Running tests
             command: |
