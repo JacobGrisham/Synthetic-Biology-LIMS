@@ -50,6 +50,7 @@ jobs:
               - "venv"
         - run:
             name: Running tests
+            command: echo $SECRET_KEY
             environment:
               SECRET_KEY: $SECRET_KEY
             command: |
