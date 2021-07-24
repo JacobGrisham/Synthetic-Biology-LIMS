@@ -23,7 +23,7 @@ jobs:
 # Referenced: https://circleci.com/blog/continuous-integration-for-django-projects/
 # Referenced: https://github.com/CircleCI-Public/circleci-demo-python-django/blob/master/.circleci/config.yml
   test_django:
-      working_directory: ~/lims_backend
+      working_directory: ~/lims
       docker:
         - image: circleci/python:3.6
           environment:
@@ -69,6 +69,7 @@ jobs:
 
   # Referenced: https://circleci.com/blog/continuously-testing-react-applications-with-jest-and-enzyme/
   test_react:
+    working_directory: ~/lims/frontend
     docker:
       - image: circleci/node:14.16.1
     steps:
