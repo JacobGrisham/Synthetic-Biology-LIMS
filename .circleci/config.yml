@@ -88,9 +88,9 @@ jobs:
             - ~/.npm # this is where the npm cache is stored when we use npm ci
       - run:
           name: Run Tests
-          command: npm test
+          command: npm test:ci
       - store_test_results:
-          path: ./src/tests/coverage/clover.xml
+          path: ./src/junit.xml
       - store_artifacts: # stores logs, binaries, etc. so that they are accessible by the app in later runs
           path: ./src/tests/coverage/lcov-report
 
@@ -101,7 +101,7 @@ jobs:
       - checkout
       # run commands to generate the coverage result
       - coverage-reporter/send_report:
-          coverage-reports: 'frontend/src/tests/coverage/lcov.info'
+          coverage-reports: 'frontend/coverage/lcov.info'
           project-token: $CODACY_PROJECT_TOKEN
   
   # deploy_AWS job: goes here
