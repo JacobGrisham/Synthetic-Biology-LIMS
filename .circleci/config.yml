@@ -88,18 +88,11 @@ jobs:
             - ~/.npm # this is where the npm cache is stored when we use npm ci
       - run:
           name: Run Tests
-          command: npm test:ci
+          command: npm run test:ci
       - store_test_results:
           path: ./src/junit.xml
       - store_artifacts: # stores logs, binaries, etc. so that they are accessible by the app in later runs
           path: ./src/tests/coverage/lcov-report
-
-  codacy-coverage-report:
-    docker:
-      - image: 'circleci/openjdk:8-jdk'
-    steps:
-      - checkout
-      # run commands to generate the coverage result
       - coverage-reporter/send_report:
           coverage-reports: 'frontend/coverage/lcov.info'
           project-token: $CODACY_PROJECT_TOKEN
@@ -113,7 +106,6 @@ workflows:
         jobs:
             - test_django
             - test_react
-            - codacy-coverage-report
             # - build_react:
             #     requires:
             #       - test_react
