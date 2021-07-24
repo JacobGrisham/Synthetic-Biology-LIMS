@@ -90,9 +90,9 @@ jobs:
           name: Run Tests
           command: npm test
       - store_test_results:
-          path: ./src/tests/jest-reports
+          path: ./src/tests/coverage/clover.xml
       - store_artifacts: # stores logs, binaries, etc. so that they are accessible by the app in later runs
-          path: ./tests/coverage/lcov-report
+          path: ./src/tests/coverage/lcov-report
 
   codacy-coverage-report:
     docker:
