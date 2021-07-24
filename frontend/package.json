@@ -29,6 +29,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:ci": "npm run test -- --coverage --ci --testResultsProcessor=\"jest-junit\" --watchAll=false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -69,6 +70,7 @@
     "prettier": "^2.3.0",
     "pretty-quick": "^3.1.0",
     "redux-logger": "^3.0.6",
-    "redux-mock-store": "^1.5.4"
+    "redux-mock-store": "^1.5.4",
+    "jest-junit": "^12.2.0"
   }
 }
