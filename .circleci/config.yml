@@ -71,7 +71,7 @@ jobs:
   test_react:
     working_directory: ~/lims_frontend/frontend
     docker:
-      - image: circleci/node:8
+      - image: circleci/node:14.16.1
     steps:
       - checkout
       - restore_cache: # restores any cache that is available from a previous build
