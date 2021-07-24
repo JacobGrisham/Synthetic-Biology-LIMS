@@ -26,12 +26,15 @@ jobs:
       working_directory: ~/lims_backend
       docker:
         - image: circleci/python:3.6
-        #   environment:
-        #     DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
-        # - image: circleci/postgres:9.6.2
-        # environment:
-        #   POSTGRES_USER: root
-        #   POSTGRES_DB: circle_test
+          environment:
+            DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
+        - image: circleci/postgres:9.6.2
+          auth:
+            username: mydockerhub-user
+            password: $DOCKERHUB_PASSWORD
+          environment:
+            POSTGRES_USER: postgres
+            POSTGRES_DB: circle_test
       steps:
         - checkout
         - restore_cache:
@@ -66,7 +69,7 @@ jobs:
 
   # Referenced: https://circleci.com/blog/continuously-testing-react-applications-with-jest-and-enzyme/
   test_react:
-    working_directory: ~/lims_frontend/frontend
+    working_directory: ~/lims_frontend
     docker:
       - image: circleci/node:8
     steps:
@@ -81,14 +84,14 @@ jobs:
       - save_cache: # save our cache of the npm dependencies
           key: lims-react-cache-v1-{{ checksum "package-lock.json" }}
           paths:
-            - /home/circleci/frontend/.npm # this is where the npm cache is stored when we use npm ci
+            - ~/.npm # this is where the npm cache is stored when we use npm ci
       - run:
           name: Run Tests
           command: npm test
       - store_test_results:
-          path: ./frontend/src/tests/jest-reports
+          path: ./src/tests/jest-reports
       - store_artifacts: # stores logs, binaries, etc. so that they are accessible by the app in later runs
-          path: ./frontend/tests/coverage/lcov-report
+          path: ./tests/coverage/lcov-report
 
   codacy-coverage-report:
     docker:
