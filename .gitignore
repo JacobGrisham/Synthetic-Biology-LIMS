@@ -26,6 +26,8 @@ nosetests.xml
 coverage.xml 
 *.cover 
 .hypothesis/ 
+junit.xml
+coverage/
 
 # Django Misc
 *.log
