@@ -69,7 +69,6 @@ jobs:
 
   # Referenced: https://circleci.com/blog/continuously-testing-react-applications-with-jest-and-enzyme/
   test_react:
-    working_directory: ~/lims_frontend/frontend
     docker:
       - image: circleci/node:14.16.1
     steps:
