@@ -29,8 +29,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test:ci": "npm run test -- --coverage --ci --testResultsProcessor=\"jest-junit\" --watchAll=false",
+    "test:ci": "react-scripts test --testResultsProcessor=\"jest-junit\" --coverage --watchAll=false --ci",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": ["index.tsx", "reportWebVitals.ts", "service-worker.ts", "serviceWorkerRegistration.ts", "<rootDir>/src/tests"]
   },
   "eslintConfig": {
     "extends": [
