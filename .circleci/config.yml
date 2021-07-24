@@ -81,7 +81,7 @@ jobs:
             - lims-react-cache-v1- # if only a few changes, then don't rebuild entire node modules
       - run:
           name: Installing React Dependencies
-          command: cd frontend && npm ci # Referenced: https://docs.npmjs.com/cli/v7/commands/npm-ci
+          command: npm ci # Referenced: https://docs.npmjs.com/cli/v7/commands/npm-ci
       - save_cache: # save our cache of the npm dependencies
           key: lims-react-cache-v1-{{ checksum "package-lock.json" }}
           paths:
