@@ -92,7 +92,7 @@ jobs:
       - store_test_results:
           path: ./src/junit.xml
       - store_artifacts: # stores logs, binaries, etc. so that they are accessible by the app in later runs
-          path: ./src/tests/coverage/lcov-report
+          path: ./coverage/lcov-report
       - coverage-reporter/send_report:
           coverage-reports: 'frontend/coverage/lcov.info'
           project-token: $CODACY_PROJECT_TOKEN
