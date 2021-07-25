@@ -35,6 +35,9 @@
   "jest": {
     "coveragePathIgnorePatterns": ["index.tsx", "reportWebVitals.ts", "service-worker.ts", "serviceWorkerRegistration.ts", "<rootDir>/src/tests"]
   },
+  "jest-junit": {
+    "outputDirectory": "./jest"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
