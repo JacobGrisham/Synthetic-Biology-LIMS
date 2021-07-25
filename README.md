@@ -4,7 +4,7 @@
   # Synthetic Biology Laboratory Information Management System (LIMS)
   [![CircleCI](https://img.shields.io/circleci/build/github/JacobGrisham/Synthetic-Biology-LIMS)](https://app.circleci.com/pipelines/github/JacobGrisham/Synthetic-Biology-LIMS)
   [![Codacy Badge](https://app.codacy.com/project/badge/Grade/d719037fafc641ada6f1f1527d8b54ca)](https://www.codacy.com/gh/JacobGrisham/Synthetic-Biology-LIMS/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=JacobGrisham/Synthetic-Biology-LIMS&amp;utm_campaign=Badge_Grade)
-  [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/d719037fafc641ada6f1f1527d8b54ca)](https://www.codacy.com/gh/JacobGrisham/Synthetic-Biology-LIMS/dashboard?utm_source=github.com&utm_medium=referral&utm_content=JacobGrisham/Synthetic-Biology-LIMS&utm_campaign=Badge_Coverage)
+  [![codecov](https://codecov.io/gh/JacobGrisham/Synthetic-Biology-LIMS/branch/master/graph/badge.svg?token=HU39MQLWVD)](https://codecov.io/gh/JacobGrisham/Synthetic-Biology-LIMS)
   ![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/jacobgrisham/Synthetic-Biology-LIMS)
   [![Updates](https://pyup.io/repos/github/JacobGrisham/Synthetic-Biology-LIMS/shield.svg)](https://pyup.io/repos/github/JacobGrisham/Synthetic-Biology-LIMS/)
   [![Python 3](https://pyup.io/repos/github/JacobGrisham/Synthetic-Biology-LIMS/python-3-shield.svg)](https://pyup.io/repos/github/JacobGrisham/Synthetic-Biology-LIMS/)
