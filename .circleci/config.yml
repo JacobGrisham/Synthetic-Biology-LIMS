@@ -104,7 +104,8 @@ jobs:
           command: |
             curl -Os https://uploader.codecov.io/latest/linux/codecov
             chmod +x codecov
-            ./codecov -t ${CODECOV_TOKEN} -s frontend/coverage
+            ./codecov  -f frontend/coverage/clover.xml -F frontend -t ${CODECOV_TOKEN}
+            ./codecov  -f backend/coverage/cov.xml -F backend -t ${CODECOV_TOKEN}
   
   # deploy_AWS job: goes here
 
