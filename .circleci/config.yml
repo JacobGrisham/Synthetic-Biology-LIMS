@@ -27,18 +27,15 @@ jobs:
       working_directory: ~/lims
       docker:
         - image: circleci/python:3.6
-          auth:
-            username: jacobdavidgrisham
-            password: $DOCKERHUB_PASSWORD
           environment:
             DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
         - image: circleci/postgres:9.6.2
-          auth:
-            username: jacobdavidgrisham
-            password: $DOCKERHUB_PASSWORD
           environment:
-            POSTGRES_USER: postgres
+            PGHOST: localhost
+            PGUSER: circleci
+            POSTGRES_USER: circleci
             POSTGRES_DB: circle_test
+            POSTGRES_HOST_AUTH_METHOD: trust
       steps:
         - checkout
         - run:
@@ -47,6 +44,9 @@ jobs:
               touch .env
               echo SECRET_KEY=$SECRET_KEY >> .env
               echo DB_PASSWORD=$DB_PASSWORD >> .env
+        - run:
+            name: Waiting for db to run
+            command: dockerize -wait tcp://localhost:5432 -timeout 1m
         - restore_cache:
             keys:
               - lims-django-cache-v1-{{ .Branch }}-{{ checksum "requirements.txt" }}
