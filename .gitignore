@@ -29,6 +29,7 @@ coverage.xml
 pytest/
 jest/
 coverage/
+.pytest_cache/
 
 # Django Misc
 *.log
