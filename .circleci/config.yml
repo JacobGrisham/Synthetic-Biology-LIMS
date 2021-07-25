@@ -1,9 +1,6 @@
 # Utilize caching: https://circleci.com/docs/2.0/caching/
 version: 2.1
 
-orbs:
-  coverage-reporter: codacy/coverage-reporter@11.5.0
-
 # Re-usable commands
 commands:
   avoid_non-deployment_updates:
@@ -69,6 +66,12 @@ jobs:
             path: ./backend/pytest
         - store_artifacts: # stores logs, binaries, etc. so that they are accessible by the app in later runs
             path: ./backend/coverage
+        - run:
+            name: Uploading Coverage to CodeCov
+            command: |
+              curl -Os https://uploader.codecov.io/latest/linux/codecov
+              chmod +x codecov
+              ./codecov  -f backend/coverage/cov.xml -F backend -t ${CODECOV_TOKEN}
 
   # Referenced: https://circleci.com/blog/continuously-testing-react-applications-with-jest-and-enzyme/
   test_react:
@@ -96,16 +99,12 @@ jobs:
           path: ./jest 
       - store_artifacts: # stores logs, binaries, etc. so that they are accessible by the app in later runs
           path: ./coverage/lcov-report
-      - coverage-reporter/send_report:
-          coverage-reports: './coverage/lcov.info'
-          project-token: $CODACY_PROJECT_TOKEN
       - run:
           name: Uploading Coverage to CodeCov
           command: |
             curl -Os https://uploader.codecov.io/latest/linux/codecov
             chmod +x codecov
             ./codecov  -f frontend/coverage/clover.xml -F frontend -t ${CODECOV_TOKEN}
-            ./codecov  -f backend/coverage/cov.xml -F backend -t ${CODECOV_TOKEN}
   
   # deploy_AWS job: goes here
 
