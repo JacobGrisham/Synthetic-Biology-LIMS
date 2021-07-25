@@ -1,0 +1,67 @@
+codecov:
+  require_ci_to_pass: yes
+
+flags:
+  frontend:
+    paths: 
+      - ./frontend/coverage/
+  projectB:
+    paths:
+      - .backend/coverage/
+
+coverage:
+  precision: 2
+  round: down
+  range: "70...100"
+
+status:
+    # To see status checks based on flags
+    project:
+      default:
+        flags:
+          - frontend
+          - backend
+      frontend:
+        flags:
+          - frontend
+      backend:
+        flags:
+          - backend
+    patch: yes
+    changes: no
+
+parsers:
+  gcov:
+    branch_detection:
+      conditional: yes
+      loop: yes
+      method: no
+      macro: no
+
+# adding Flags to your `layout` configuration to show up in the PR comment
+comment:
+  layout: "reach, diff, flags, files"
+  behavior: default
+  require_changes: false  
+  require_base: yes
+  require_head: yes       
+  branches: null
+
+# new section in the root YAML, flag_management:
+flag_management:
+  # this section will govern all default rules of Flags
+  default_rules:
+    carryforward: boolean?
+    ignore: [path]?
+    paths: [path]?
+    statuses: [ #note, statuses are an array
+      name_prefix: string (r"^[\w\-\.]+$")
+      type: OR("project", "patch", "changes")
+      target: OR("auto", percent)?
+      include_changes: OR("auto", precent)?
+      threshold: percent?
+      **normal status attributes
+    ]?
+
+# No individual flags are added to YAML and flag names are automatically
+# ingested from the Uploader
