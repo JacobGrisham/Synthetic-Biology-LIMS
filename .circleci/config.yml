@@ -2,7 +2,8 @@
 version: 2.1
 
 orbs:
-  coverage-reporter: codacy/coverage-reporter@11.5.0 # Invoke the Codacy Code Coverage orb
+  coverage-reporter: codacy/coverage-reporter@11.5.0
+  codecov: codecov/codecov@1.2.3
 
 # Re-usable commands
 commands:
@@ -89,13 +90,16 @@ jobs:
       - run:
           name: Run Tests
           command: npm run test:ci
-      - store_test_results:
-          path: ./jest
+      - store_test_results: # Reference: https://support.circleci.com/hc/en-us/articles/360021624194-Test-summary-troubleshooting
+          path: ./jest 
       - store_artifacts: # stores logs, binaries, etc. so that they are accessible by the app in later runs
           path: ./coverage/lcov-report
       - coverage-reporter/send_report:
           coverage-reports: './coverage/lcov.info'
           project-token: $CODACY_PROJECT_TOKEN
+      - codecov/upload:
+          file: ./coverage/*.xml
+          token: $CODECOV_TOKEN
   
   # deploy_AWS job: goes here
 
