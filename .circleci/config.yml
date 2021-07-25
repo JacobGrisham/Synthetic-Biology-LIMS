@@ -65,11 +65,11 @@ jobs:
             name: Running tests
             command: |
               source venv/bin/activate
-              python3 manage.py test
+              pytest --junitxml=backend/pytest/junit.xml --cov=backend/tests/ --html=./backend/coverage/report.html
         - store_test_results:
-            path: ./backend/tests/test-reports/pytest
+            path: ./backend/pytest
         - store_artifacts: # stores logs, binaries, etc. so that they are accessible by the app in later runs
-            path: ./backend/tests/test-reports/lcov-report
+            path: ./backend/coverage
 
   # Referenced: https://circleci.com/blog/continuously-testing-react-applications-with-jest-and-enzyme/
   test_react:
