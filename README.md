@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="200" src="frontend/public/logo512.png" alt="Synthetic Biology LIMS logo">
+  <img width="200" src="react-frontend/frontend/public/logo512.png" alt="Synthetic Biology LIMS logo">
 
   # Synthetic Biology Laboratory Information Management System (LIMS)
   [![CircleCI](https://img.shields.io/circleci/build/github/JacobGrisham/Synthetic-Biology-LIMS)](https://app.circleci.com/pipelines/github/JacobGrisham/Synthetic-Biology-LIMS)
@@ -73,10 +73,25 @@
 -   Manage products (output from a job)
 
 ## 🚀 Getting Started
+### To run this project on your system:
+<ol>
+  <li>Make sure you have [Docker](https://docs.docker.com/get-docker/) installed and running on your computer</li>
+  <li>Make sure you have [PostgreSQL](https://www.postgresql.org/download/) installed and running on your computer. If you installed PostgreSQL with [Homebrew](https://brew.sh/), then you can start PostgreSQL with `brew services start postgresql`</li>
+  <li>Make sure you have [Redis](https://redis.io/download) installed and running on your computer</li>
+  <li>In your terminal, navigate to the root of this repository and run `docker-compose up` (you will have to run `docker-compose up --build` for the first setup phase)</li>
+</ol>
+
+
+**⚠️ Important:** if you are getting conflict errors, you should run `docker stop <container name>` that is already running in the background.  
+**⚠️ Important:** if you are getting other errors, you should run `docker-compose down` to bring everything down, and start over.  
+
+### To contribute to this project on your system:
+-   Ensure that `git lfs` is installed on your system. Download the extension here [git-lfs.github.com](https://git-lfs.github.com/).
+-   To make git commits, navigate to the root directory, add files to git staging, and then run `npm run commit` to ensure your commit follows the [Gitmoji](https://gitmoji.dev) guidelines.
 
 ## 📐 Tests
-- Django unit tests
-- React unit and integration tests
+-   Interactive code coverage diagram on [codecov](https://codecov.io/gh/JacobGrisham/Synthetic-Biology-LIMS). The code coverage takes into account both the Django unit tests and the React unit/integration tests.
+-   [Django unit](https://app.circleci.com/pipelines/github/JacobGrisham/Synthetic-Biology-LIMS/50/workflows/d5bd12a2-0792-49e8-b318-54b0cb35f843/jobs/117/tests) and the [React unit/integration](https://app.circleci.com/pipelines/github/JacobGrisham/Synthetic-Biology-LIMS/50/workflows/d5bd12a2-0792-49e8-b318-54b0cb35f843/jobs/116/tests) junit.xml test reports and code coverage artifacts automatically uploaded to circleci.
 
 ## 🔒 License
 Copyright Notice and Statement: currently not offering any license. Permission only to view and download. Refer to [choose a license](https://choosealicense.com/no-permission/) for more info.
