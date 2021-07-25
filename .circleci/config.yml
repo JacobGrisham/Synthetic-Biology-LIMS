@@ -41,10 +41,12 @@ jobs:
             POSTGRES_DB: circle_test
       steps:
         - checkout
-        - run: sudo apt-get update
-        - run: sudo apt-get install postgresql-client-9.6
-        - run: sudo apt-get install psycopg
-        - run: whoami
+        - run:
+            name: Configuring Environment
+            command: |
+              touch .env
+              echo SECRET_KEY=$SECRET_KEY >> .env
+              echo DB_PASSWORD=$DB_PASSWORD >> .env
         - restore_cache:
             keys:
               - lims-django-cache-v1-{{ .Branch }}-{{ checksum "requirements.txt" }}
@@ -59,12 +61,6 @@ jobs:
             key: lims-django-cache-v1-{{ .Branch }}-{{ checksum "requirements.txt" }}
             paths:
               - "venv"
-        - run:
-            name: Configuring Environment
-            command: |
-              touch .env
-              echo SECRET_KEY=$SECRET_KEY >> .env
-              echo DB_PASSWORD=$DB_PASSWORD >> .env
         - run:
             name: Running tests
             command: |
