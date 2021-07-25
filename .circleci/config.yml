@@ -20,7 +20,7 @@ jobs:
 # Referenced: https://circleci.com/blog/continuous-integration-for-django-projects/
 # Referenced: https://github.com/CircleCI-Public/circleci-demo-python-django/blob/master/.circleci/config.yml
   test_django:
-      working_directory: ~/lims
+      working_directory: ~/lims/django-backend
       docker:
         - image: circleci/python:3.6
           environment:
@@ -34,6 +34,7 @@ jobs:
             POSTGRES_HOST_AUTH_METHOD: trust
       steps:
         - checkout
+            path: ~/lims
         - run:
             name: Configuring Environment
             command: |
@@ -75,7 +76,7 @@ jobs:
 
   # Referenced: https://circleci.com/blog/continuously-testing-react-applications-with-jest-and-enzyme/
   test_react:
-    working_directory: ~/lims/frontend # set working directory as this, but must checkout code one directory higher via path
+    working_directory: ~/lims/react-frontend/frontend # set working directory as this, but must checkout code one directory higher via path
     docker:
       - image: circleci/node:14.16.1
     steps:
