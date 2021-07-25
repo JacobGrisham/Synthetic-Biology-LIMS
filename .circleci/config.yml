@@ -33,7 +33,7 @@ jobs:
           environment:
             PGHOST: localhost
             PGUSER: circleci
-            POSTGRES_USER: circleci
+            POSTGRES_USER: jacobdavidgrisham
             POSTGRES_DB: circle_test
             POSTGRES_HOST_AUTH_METHOD: trust
       steps:
