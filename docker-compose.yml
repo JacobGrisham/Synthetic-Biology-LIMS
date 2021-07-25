@@ -1,69 +1,53 @@
-version: '3.8'
+version: '3.7'
 
 services:
-  lims_django_backend:
-    env_file:
-      - ./backend/.env
-    # Since we have a Dockerfile, we don't need to specify the line below. It is commented out
-    # image: node: 12.18.3
-    container_name: lims_django_backend
-    # build allows us to build from our own Dockerfile instead of a default Image like node:8.11.1
-    # build references the Dockerfile in the root directory
-    build: ./backend
-    command: npm start
-    working_dir: /usr/src/backend
-    # These environmental variables are referenced by the connection in server.js through a process.env
-    environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: face-recognition-database-docker
-      POSTGRES_HOST: postgres
-      REDIS_URL: redis://redis-cache
-    # The first 3000 represents the port on your local machine, the : represents forwarding, and second 3000 represents the port of the container
-    ports:
-      - "3000:3000"
-    # volumes allows access to the file system of the container
-    # ./ represents the directory of your local machine, the : represents forwarding, and /usr/src/backend represents the directory of the container
-    # This enables changes made on your local machine to populate in the container automatically
+  django:
+    build:
+      context: ./django-backend
+      dockerfile: Dockerfile
     volumes:
-      - ./backend:/usr/src/backend
-      # - /usr/src/backend/node_modules
-
-  # Redis Database
-  lims_redis_cache:
-    image: redis
-    container_name: lims_redis_cache
-    command: redis-server
-    ports:
-      - "6379:6379"
-
-  # PostgreSQL Database
-  lims_postgres_db:
-    # To connect the back-end-api service to our database, we need to include the environment below in both our database service and back-end-api service
-    environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: face-recognition-database-docker
-      POSTGRES_HOST: postgres
-    # Telling Docker to run whatever is in the postgres directory on our local machine. In this case, we will get tables generated for our database in the Docker container
-    build: ./backend/postgres
-    # The first 5432 represents the port on your local machine, the : represents forwarding, and the second 5432 represents the port of the container
-    ports:
-      - "5432:5432"
-
-  # Front-end React User Interface
-  lims_react_frontend:
+      - django_static_volume:/usr/src/app/static
+    expose:
+      - 8000
     env_file:
-    - ./frontend/.env
-    container_name: lims_react_frontend
-    build: ./frontend
-    command: npm start
-    working_dir: /usr/src/frontend
-    ports:
-      - "3001:3001"
-    stdin_open: true
-    environment:
-      - CHOKIDAR_USEPOLLING=true
+      - ./django-backend/.env
+    command: gunicorn mainapp.wsgi:application --bind 0.0.0.0:8000
+    depends_on:
+      - db
+  db:
+    image: postgres:12.0-alpine
     volumes:
-        - ./frontend:/usr/src/frontend
-        # - /usr/src/frontend/node_modules
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./postgres/.env
+  react:
+    build:
+      context: ./react-frontend
+      dockerfile: Dockerfile
+      args:
+        - API_SERVER=${ENV_API_SERVER}
+    volumes:
+      - react_static_volume:/usr/src/app/build/static
+    expose:
+      - 3000
+    env_file:
+      - .env
+    command: serve -s build -l 3000
+    depends_on:
+      - django
+
+  nginx:
+    restart: always
+    build: ./nginx
+    volumes:
+      - django_static_volume:/usr/src/app/django_files/static
+      - react_static_volume:/usr/src/app/react_files/static
+    ports:
+      - 80:80
+    depends_on:
+      - react
+
+volumes:
+  postgres_data:
+  django_static_volume:
+  react_static_volume:
