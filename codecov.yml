@@ -4,10 +4,10 @@ codecov:
 flags:
   frontend:
     paths: 
-      - ./frontend/coverage/
+      - ./react-frontend/frontend/coverage/
   projectB:
     paths:
-      - .backend/coverage/
+      - ./django-backend/backend/coverage/
 
 coverage:
   precision: 2
