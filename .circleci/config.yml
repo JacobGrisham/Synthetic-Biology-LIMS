@@ -3,7 +3,6 @@ version: 2.1
 
 orbs:
   coverage-reporter: codacy/coverage-reporter@11.5.0
-  codecov: codecov/codecov@1.2.3
 
 # Re-usable commands
 commands:
@@ -65,7 +64,7 @@ jobs:
             name: Running tests
             command: |
               source venv/bin/activate
-              pytest --junitxml=backend/pytest/junit.xml --cov=backend/tests/ --html=./backend/coverage/report.html
+              pytest --junitxml=backend/pytest/junit.xml --cov=backend/tests/ --cov-report xml:backend/coverage/cov.xml --html=./backend/coverage/report.html
         - store_test_results:
             path: ./backend/pytest
         - store_artifacts: # stores logs, binaries, etc. so that they are accessible by the app in later runs
@@ -91,7 +90,7 @@ jobs:
           paths:
             - ~/.npm # this is where the npm cache is stored when we use npm ci
       - run:
-          name: Run Tests
+          name: Running Tests
           command: npm run test:ci
       - store_test_results: # Reference: https://support.circleci.com/hc/en-us/articles/360021624194-Test-summary-troubleshooting
           path: ./jest 
@@ -100,9 +99,12 @@ jobs:
       - coverage-reporter/send_report:
           coverage-reports: './coverage/lcov.info'
           project-token: $CODACY_PROJECT_TOKEN
-      - codecov/upload:
-          file: ./coverage/*.xml
-          token: $CODECOV_TOKEN
+      - run:
+          name: Uploading Coverage to CodeCov
+          command: |
+            curl -Os https://uploader.codecov.io/latest/linux/codecov
+            chmod +x codecov
+            ./codecov -t ${CODECOV_TOKEN}
   
   # deploy_AWS job: goes here
 
