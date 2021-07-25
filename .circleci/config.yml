@@ -90,7 +90,7 @@ jobs:
           name: Run Tests
           command: npm run test:ci
       - store_test_results:
-          path: ./junit.xml
+          path: ./jest/junit.xml
       - store_artifacts: # stores logs, binaries, etc. so that they are accessible by the app in later runs
           path: ./coverage/lcov-report
       - coverage-reporter/send_report:
