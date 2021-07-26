@@ -39,7 +39,7 @@ jobs:
             name: Configuring Environment
             command: |
               touch .env
-              echo DJANGO_ENV='continuous-integration' >> .env
+              echo DJANGO_ENV=$DJANGO_ENV >> .env
               echo SECRET_KEY=$SECRET_KEY >> .env
               echo DB_PASSWORD=$DB_PASSWORD >> .env
         - run:
