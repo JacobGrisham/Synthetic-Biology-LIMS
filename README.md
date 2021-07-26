@@ -75,9 +75,9 @@
 ## 🚀 Getting Started
 ### To run this project on your system:
 <ol>
-  <li>Make sure you have [Docker](https://docs.docker.com/get-docker/) installed and running on your computer</li>
-  <li>Make sure you have [PostgreSQL](https://www.postgresql.org/download/) installed and running on your computer. If you installed PostgreSQL with [Homebrew](https://brew.sh/), then you can start PostgreSQL with `brew services start postgresql`</li>
-  <li>Make sure you have [Redis](https://redis.io/download) installed and running on your computer</li>
+  <li>Make sure you have <a href='https://docs.docker.com/get-docker/'>Docker</a> installed and running on your computer</li>
+  <li>Make sure you have <a href='https://www.postgresql.org/download/'>PostgreSQL</a> installed and running on your computer. If you installed PostgreSQL with <a href='https://brew.sh/'>Homebrew</a>, then you can start PostgreSQL with `brew services start postgresql`</li>
+  <li>Make sure you have <a href='https://redis.io/download'>Redis</a> installed and running on your computer</li>
   <li>In your terminal, navigate to the root of this repository and run `docker-compose up` (you will have to run `docker-compose up --build` for the first setup phase)</li>
 </ol>
 
