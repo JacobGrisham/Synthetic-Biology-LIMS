@@ -16,19 +16,6 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -91,6 +78,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'LIMS.wsgi.application'
 
+# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 # Get Django environment set by docker (i.e either development or production), or else set it to local
 try:
     DJANGO_ENV = os.environ.get("DJANGO_ENV")
@@ -127,6 +115,15 @@ if DJANGO_ENV == 'development' or DJANGO_ENV == 'production':
             'PORT': os.environ.get('DB_PPORT', '5432'),
         }
     }
+elif DJANGO_ENV == 'continuous-integration':
+
+    SECRET_KEY = os.environ.get("SECRET_KEY")
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+        }
+    }
 else:
     SECRET_KEY = 'localsecret'
     DEBUG = True
@@ -135,6 +132,7 @@ else:
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'predictiondb',
+            'USER': 'postgres_user',
             'PASSWORD': 'postgres_password',
             'HOST': '127.0.0.1',
             'PORT': '5432',
