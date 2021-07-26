@@ -86,13 +86,12 @@ except:
     DJANGO_ENV = 'local'
 
 # If Django environement has been set by docker it would be either development or production otherwise it would be undefined or local
+try:
+    SECRET_KEY = os.environ.get("SECRET_KEY")
+except:
+    SECRET_KEY = 'localsecret'
 
 if DJANGO_ENV == 'development' or DJANGO_ENV == 'production':
-
-    try:
-        SECRET_KEY = os.environ.get("SECRET_KEY")
-    except:
-        SECRET_KEY = 'localsecret'
 
     try:
         DEBUG = int(os.environ.get("DEBUG", default=0))
@@ -117,15 +116,17 @@ if DJANGO_ENV == 'development' or DJANGO_ENV == 'production':
     }
 elif DJANGO_ENV == 'continuous-integration':
 
-    SECRET_KEY = os.environ.get("SECRET_KEY")
-
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'db.postgresql',
+            'USER': 'jacobdavidgrisham',
+            'PASSWORD': os.environ.get('DB_PASSWORD'),
+            'HOST': 'localhost',
+            'PORT': 5432,
         }
     }
 else:
-    SECRET_KEY = 'localsecret'
     DEBUG = True
     ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'localhost']
     DATABASES = {
