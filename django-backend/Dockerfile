@@ -42,7 +42,7 @@ WORKDIR /usr/src/app
 COPY ./entrypoint.sh /usr/src/app/entrypoint.sh
 
 # copy our django project
-COPY ./backend .
+COPY ./ ./
 
 # run entrypoint.sh
 RUN chmod +x /usr/src/app/entrypoint.sh

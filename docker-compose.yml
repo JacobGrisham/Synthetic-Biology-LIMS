@@ -1,6 +1,7 @@
 version: '3.7'
 
 services:
+
   django:
     build:
       context: ./django-backend
@@ -11,15 +12,17 @@ services:
       - 8000
     env_file:
       - ./django-backend/.env
-    command: gunicorn mainapp.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn LIMS.wsgi:application --bind 0.0.0.0:8000
     depends_on:
       - db
+
   db:
     image: postgres:12.0-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
       - ./postgres/.env
+
   react:
     build:
       context: ./react-frontend
