@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -55,9 +54,6 @@ REST_FRAMEWORK = {
     # )
 }
 
-# SECURITY WARNING: don't run with CORS turned off (off = True) in production!
-CORS_ORIGIN_ALLOW_ALL = True
-
 ROOT_URLCONF = 'LIMS.urls'
 
 TEMPLATES = [
@@ -78,72 +74,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'LIMS.wsgi.application'
 
-# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
-# Get Django environment set by docker (i.e either development or production), or else set it to local
-try:
-    DJANGO_ENV = os.environ.get("DJANGO_ENV")
-except:
-    DJANGO_ENV = 'local'
-
-# If Django environement has been set by docker it would be either development or production otherwise it would be undefined or local
-try:
-    SECRET_KEY = os.environ.get("SECRET_KEY")
-except:
-    SECRET_KEY = 'localsecret'
-
-if DJANGO_ENV == 'development' or DJANGO_ENV == 'production':
-
-    try:
-        DEBUG = int(os.environ.get("DEBUG", default=0))
-    except:
-        DEBUG = False
-
-    try:
-        ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
-    except:
-        ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'localhost']
-
-    # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'db.postgresql',
-            'USER': os.environ.get('DB_USER', 'user'),
-            'PASSWORD': os.environ.get('DB_PASSWORD', 'password'),
-            'HOST': os.environ.get('DB_HOST', 'localhost'),
-            'PORT': os.environ.get('DB_PPORT', '5432'),
-        }
-    }
-elif DJANGO_ENV == 'continuous-integration':
-
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'db.postgresql',
-            'USER': 'jacobdavidgrisham',
-            'PASSWORD': os.environ.get('DB_PASSWORD'),
-            'HOST': 'localhost',
-            'PORT': 5432,
-        }
-    }
-else:
-    DEBUG = True
-    ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'localhost']
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'predictiondb',
-            'USER': 'postgres_user',
-            'PASSWORD': 'postgres_password',
-            'HOST': '127.0.0.1',
-            'PORT': '5432',
-        }
-    }
-
-# define where the static files are collected in the production build when the command 'python manage.py collectstatic --noinput' is run from the 'entrypoint.sh' file, otherwise this command would not run
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_URL = '/static/'
-
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -162,7 +92,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -176,8 +105,8 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.1/howto/static-files/
-
-STATIC_URL = '/static/'
+# IMPORT LOCAL SETTINGS
+try:
+    from .local_settings import * 
+except ImportError: 
+    pass 
