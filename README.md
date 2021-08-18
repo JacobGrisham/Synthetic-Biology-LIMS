@@ -118,12 +118,12 @@
 **⚠️ Important:** if you are getting conflict errors, you should run `docker stop <container name>` that is already running in the background.  
 **⚠️ Important:** if you are getting other errors, you should run `docker-compose down` to bring everything down, and start over.  
 
-### To run this project on your system with manually (without Docker):
+### To run this project on your system manually (without Docker):
 <ol>
-  <li>Ensure that python3 and pip are installed on your system</li>
+  <li>Ensure that python3, python3-pip, and python3-venv are installed on your system</li>
+  <li>(For first time running this application) run <code>python3 -m venv venv</code> to create the virtual environment. Navigate to the directory django-backend and run <code>source venv/bin/activate</code> to activate the virtual environment. (For first time running this application) Run <code>pip install -r requirements.txt</code> to install the django dependencies</li>
   <li>(If you need to set up local database) Navigate to the directory django-backend and run <code>python3 manage.py migrate</code> and then <code>python3 manage.py makemigrations</code></li>
-  <li>Navigate to the directory django-backend and run <code>source venv/bin/activate</code> to activate the virtual environment. (For first time running this application) Run <code>pip install -r requirements.txt</code> to install the django dependencies</li>
-  <li>While still in the django-backend directory, run <code>python manage.py runserver</code> to start the server</li>
+  <li>While still in the django-backend directory, run <code>python3 manage.py runserver</code> to start the server</li>
   <li>(For first time running this application) Navigate to the directory react-frontend and run <code>npm install</code> to install the react dependencies</li>
   <li>Navigate to the directory react-frontend and run <code>npm start</code></li>
   <li>To view the application in a web browser, visit <a href='http://localhost:3000'>http://localhost:3000</a></li>
@@ -131,7 +131,8 @@
 
 ### To contribute to this project on your system:
 -   Ensure that `git lfs` is installed on your system. Download the extension here [git-lfs.github.com](https://git-lfs.github.com/).
--   To make git commits, navigate to the root directory, add files to git staging with `git add <path/to/file>`, and then run `npm run commit` to activate the [Gitmoji](https://gitmoji.dev) interactive prompt in your terminal. After completing the prompt, exit with `:wq` 
+-   To make git commits, navigate to the root directory, add files to git staging with `git add <path/to/file>`, and then run `npm run commit` to activate the [Gitmoji](https://gitmoji.dev) interactive prompt in your terminal. Here's a preview of the [interactive prompt](https://www.npmjs.com/package/gitmoji-cli). After completing the prompt, exit with `:wq`
+-   If making README.md updates, be sure to add `[skip ci]` to the git commit message in order to prevent running unneccessary tests in continuous integration and deployment.
 
 ## 🔒 License
 Copyright Notice and Statement: currently not offering any license. Permission only to view and download. Refer to [choose a license](https://choosealicense.com/no-permission/) for more info.
