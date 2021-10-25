@@ -124,14 +124,14 @@
   <li>(For first time running this application) run <code>python3 -m venv venv</code> to create the virtual environment. Navigate to the directory django-backend and run <code>source venv/bin/activate</code> to activate the virtual environment. (For first time running this application) Run <code>pip install -r requirements.txt</code> to install the django dependencies</li>
   <li>(If you need to set up local database) Navigate to the directory django-backend and run <code>python3 manage.py migrate</code> and then <code>python3 manage.py makemigrations</code></li>
   <li>While still in the django-backend directory, run <code>python3 manage.py runserver</code> to start the server</li>
-  <li>(For first time running this application) Navigate to the directory react-frontend and run <code>npm install</code> to install the react dependencies</li>
-  <li>Navigate to the directory react-frontend and run <code>npm start</code></li>
+  <li>(For first time running this application) Navigate to the directory react-frontend/frontend and run <code>npm install</code> to install the react dependencies</li>
+  <li>Open a new terminal tab or window, navigate to the directory react-frontend/frontend, and run <code>npm start</code></li>
   <li>To view the application in a web browser, visit <a href='http://localhost:3000'>http://localhost:3000</a></li>
 </ol>
 
 ### To contribute to this project on your system:
 -   Ensure that `git lfs` is installed on your system. Download the extension here [git-lfs.github.com](https://git-lfs.github.com/).
--   To make git commits, navigate to the root directory, add files to git staging with `git add <path/to/file>`, and then run `npm run commit` to activate the [Gitmoji](https://gitmoji.dev) interactive prompt in your terminal. Here's a preview of the [interactive prompt](https://www.npmjs.com/package/gitmoji-cli). After completing the prompt, exit with `:wq`
+-   To make git commits, navigate to the root directory, add files to git staging with `git add <path/to/file>`, and then run `git commit` to activate the [Gitmoji](https://gitmoji.dev) interactive prompt in your terminal. Here's a preview of the [interactive prompt](https://www.npmjs.com/package/gitmoji-cli). After completing the prompt, exit with `:wq`
 -   If making README.md updates, be sure to add `[skip ci]` to the git commit message in order to prevent running unneccessary tests in continuous integration and deployment.
 
 ## 🔒 License
