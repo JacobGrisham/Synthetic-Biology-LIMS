@@ -22,7 +22,8 @@ const Table = styled.table`
   & td, th {
     padding-bottom: 2%;
 	  padding-top: 2%;
-    padding-left: 2%; 
+    padding-left: 2%;
+    border-radius: 0.5rem;
   }
 
   & tr:nth-child(odd) {

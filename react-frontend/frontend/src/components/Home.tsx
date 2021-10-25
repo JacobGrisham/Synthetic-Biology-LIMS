@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import GlobalStyle from './styled-components/theme';
+import NavBar from './NavBar';
 import Header from './Header';
-import HeaderBackground from './HeaderBackground';
 import CompanyTable from './CompanyTable';
 import Footer from './Footer';
-import FooterBackground from './FooterBackground';
+import Background from '../assets/images/header-background.svg';
 
 interface IHomeProps {
   companies: any;
@@ -14,8 +14,11 @@ interface IHomeProps {
 }
 
 const Layout = styled.main`
-  // display: grid;
-  // grid-template-rows: [hero-start] 100vh [hero-end table-start] minmax(10rem, 1fr) [table-end footerbackground-start] minmax(10rem, 1fr) [footerbackground-end];
+  display: grid;
+  grid-template-rows: [hero-start] 100vh [hero-end table-start] minmax(10rem, 1fr) [table-end footer-decoration-start] minmax(10rem, 1fr) [footer-decoration-end footer-start] minmax(10rem, 15rem) [footer-end];
+  background-image: url(${Background});
+  background-size: 100vw;
+  background-repeat: no-repeat;
 `
 
 const Home = (props: IHomeProps) => {
@@ -29,12 +32,11 @@ const Home = (props: IHomeProps) => {
   return isPending ? <h1>Loading...</h1> : (
     <Layout>
       <GlobalStyle />
+      <NavBar />
       <Header />
-      <HeaderBackground />
       <CompanyTable 
         companies={companies}
       />
-      <FooterBackground />
       <Footer />
     </Layout>
   );
