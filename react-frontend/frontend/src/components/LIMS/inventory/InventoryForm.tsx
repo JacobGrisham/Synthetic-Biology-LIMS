@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import CUDButtons from './microcomponents/CUDButtons';
-import IconButton from './IconButton';
+import CUDButtons from '../buttons/CUDButtons';
+import IconButton from '../buttons/IconButton';
 import ChemicalForm from './ChemicalForm'
 import addIcon from '../../assets/images/add-icon.svg';
 

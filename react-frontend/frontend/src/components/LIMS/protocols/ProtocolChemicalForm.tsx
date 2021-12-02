@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import IconButton from './IconButton';
-import Units from './Units';
+import IconButton from '../buttons/IconButton';
+import Units from '../inventory/Units';
 import inventoryIcon from '../../assets/images/inventory-icon.svg';
 
 type IButtonProps = {

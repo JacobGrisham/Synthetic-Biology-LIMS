@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import CUDButtons from './microcomponents/CUDButtons';
+import CUDButtons from '../buttons/CUDButtons';
 import ProtocolStepForm from './ProtocolStepForm';
 
 const Layout = styled.form `

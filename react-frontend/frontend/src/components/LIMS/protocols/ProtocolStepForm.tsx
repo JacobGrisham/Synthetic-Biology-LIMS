@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import IconButton from './IconButton';
+import IconButton from '../buttons/IconButton';
 import ProtocolChemicalForm from './ProtocolChemicalForm';
 import microscopeIcon from '../../assets/images/microscope-icon.svg';
 import bookIcon from '../../assets/images/book-icon.svg';

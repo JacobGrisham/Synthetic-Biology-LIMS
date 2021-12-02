@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ProtocolStep from './ProtocolStep';
 import ButtonOutline from '../buttons/ButtonOutline';
 import Metadata from '../microcomponents/Metadata';
-import HistoryList from '../HistoryList';
+import HistoryList from '../microcomponents/HistoryList';
 
 const Layout = styled.section `
   overflow-y: scroll;

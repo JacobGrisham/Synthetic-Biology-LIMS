@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import ButtonOutline from '../buttons/ButtonOutline';
-import JobListItem from '../JobListItem';
+import JobListItem from '../jobs/JobListItem';
 import Table from '../jobs/Table';
 import Metadata from '../microcomponents/Metadata';
-import HistoryList from '../HistoryList';
+import HistoryList from '../microcomponents/HistoryList';
 import Button from '@mui/material/Button';
 
 const Layout = styled.section `
