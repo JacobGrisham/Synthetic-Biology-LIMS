@@ -3,9 +3,9 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import GlobalStyle from '../styled-components/theme';
-import NavBar from './NavBar';
-import Search from './Search';
-import Inventory from './Inventory';
+import NavBar from './microcomponents/NavBar';
+import Drawer from './microcomponents/Drawer';
+import JobStatus from './projects/Project';
 
 const LIMSLayout = styled.main `
   display: grid;
@@ -22,8 +22,8 @@ const LIMS = (props: ILIMSProps) => {
       <GlobalStyle />
       <LIMSLayout>
         <NavBar />
-        <Search {...props} />
-        <Inventory />
+        <Drawer {...props} />
+        <JobStatus />
       </LIMSLayout>
     </Fragment>
   )
