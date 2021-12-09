@@ -10,6 +10,7 @@
   [![Python 3](https://pyup.io/repos/github/JacobGrisham/Synthetic-Biology-LIMS/python-3-shield.svg)](https://pyup.io/repos/github/JacobGrisham/Synthetic-Biology-LIMS/)
   [![gitmoji](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square)](https://gitmoji.dev)
   [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://semantic-release.gitbook.io/semantic-release/)
+  ![GitHub all releases](https://img.shields.io/github/downloads/JacobGrisham/Synthetic-Biology-LIMS/total)
 </div>
 
 ## 🎓 [Final Project](https://cs50.harvard.edu/web/2020/projects/final/capstone/) for [Harvard's Web Programming with Python and Javascript CS50W hosted on eDX](https://www.edx.org/course/cs50s-web-programming-with-python-and-javascript)
