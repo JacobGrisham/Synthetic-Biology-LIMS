@@ -1,17 +1,16 @@
 import * as React from 'react';
-import {ReactComponent as Logo} from './assets/images/logo-icon.svg';
-import Avatar from '@mui/material/Avatar';
+import styled from 'styled-components';
+import {ReactComponent as Logo} from '../../assets/images/logo.svg';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
 
 function Copyright(props: any) {
   return (
@@ -34,7 +33,11 @@ export default function SignUp() {
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
     console.log({
-      email: data.get('email'),
+      first: data.get('firstName'),
+      last: data.get('lastName'),
+      username: data.get('userName'),
+      company: data.get('company'),
+      companykey: data.get('companyKey'),
       password: data.get('password'),
     });
   };
@@ -51,11 +54,9 @@ export default function SignUp() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <Logo />
-          </Avatar>
+          <Logo />
           <Typography component="h1" variant="h5">
-            Sign up
+            Register
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -82,12 +83,32 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  autoComplete="username"
+                  name="userName"
                   required
                   fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
+                  id="username"
+                  label="Username"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="company"
+                  label="Company"
+                  name="company"
+                  autoComplete="company"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="companyKey"
+                  label="Company Key"
+                  name="companyKey"
+                  autoComplete="company-key"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -101,12 +122,6 @@ export default function SignUp() {
                   autoComplete="new-password"
                 />
               </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
-              </Grid>
             </Grid>
             <Button
               type="submit"
@@ -114,12 +129,12 @@ export default function SignUp() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              Register
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="#" variant="body2">
-                  Already have an account? Sign in
+                  Already have an account? Log In
                 </Link>
               </Grid>
             </Grid>
