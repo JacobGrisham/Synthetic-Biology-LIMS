@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Typography from '@mui/material/Typography';
 
 const OrderedList = styled.ol `
   overflow-y: scroll;
@@ -8,10 +9,7 @@ const OrderedList = styled.ol `
 `
 
 const Box = styled.li `
-  max-width: 320px;
-  height: 70px;
-  padding: 1.2rem;
-  line-height: 2.2rem;
+  padding: 1rem;
   text-decoration: none;
   text-align: left;
   border-radius: 0.5rem;
@@ -28,12 +26,12 @@ const HistoryList = () => {
   return (
     <OrderedList>
       <Box>
-        <h5>Updated: <time dateTime="2021-11-15 20:00">2021-11-15 20:00</time></h5>
-        <p>Jacob Grisham</p>
+        <Typography variant="subtitle2">Updated: <time dateTime="2021-11-15 20:00">2021-11-15 20:00</time></Typography>
+        <Typography variant="body2">Jacob Grisham</Typography>
       </Box>
       <Box>
-        <h5>Updated: <time dateTime="2021-11-15 20:00">2021-11-15 20:00</time></h5>
-        <p>Jacob Grisham</p>
+        <Typography variant="subtitle2">Updated: <time dateTime="2021-11-15 20:00">2021-11-15 20:00</time></Typography>
+        <Typography variant="body2">Jacob Grisham</Typography>
       </Box>
     </OrderedList>
   )

@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Button = styled.button `
-width: 12rem;
-padding: 1.2rem 2rem;
+width: 6rem;
+padding: 1rem 1.5rem;
 text-decoration: none;
 text-align: center;
 color: rgb(144, 202, 249);
@@ -14,6 +14,7 @@ background-color: white;
   &:hover {
     color: white;
     background-color: rgb(144, 202, 249);
+    cursor: pointer;
   }
 
   &:active {

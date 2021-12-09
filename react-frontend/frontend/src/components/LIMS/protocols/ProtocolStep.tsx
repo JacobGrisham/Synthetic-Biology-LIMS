@@ -1,10 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import microscopeIcon from '../../assets/images/microscope-icon.svg';
-import inventoryIcon from '../../assets/images/inventory-icon.svg';
-import bookIcon from '../../assets/images/book-icon.svg';
+import microscopeIcon from '../../../assets/images/microscope-icon.svg';
+import inventoryIcon from '../../../assets/images/inventory-icon.svg';
+import bookIcon from '../../../assets/images/book-icon.svg';
+import Typography from '@mui/material/Typography';
 
 const Layout = styled.details `
+  & > summary {
+    margin-bottom: 0.5rem;
+  }
   & > div {
     padding: 1.2rem;
     border-radius: 0.5rem;
@@ -40,28 +44,28 @@ const ProtocolStep = () => {
       <summary>Step 1</summary>
       <div>
         <Details>
-          <h2>Equipment</h2>
+          <Typography variant="subtitle1">Equipment</Typography>
           <img src={microscopeIcon} alt={"equipment icon"}/> 
-          <p>PCR Chamber</p>
+          <Typography variant="body1">PCR Chamber</Typography>
         </Details>
         <Details>
-          <h2>Input Amount(s)</h2>
+          <Typography variant="subtitle1">Input Amount(s)</Typography>
           <img src={inventoryIcon} alt={"chemical input amount icon"}/>
           <div>
-            <p>Reverse Transcriptase <span>20mg</span></p>
-            <p>Reagant <span>50mg</span></p>
-            <p>Saline Solution <span>1000mg</span></p>
+            <Typography variant="body1">Reverse Transcriptase <span>20mg</span></Typography>
+            <Typography variant="body1">Saline Solution <span>1000mg</span></Typography>
+            <Typography variant="body1">CRISPR <span>50mg</span></Typography>
           </div>
         </Details>
         <Details>
-          <h2>Instructions</h2>
+          <Typography variant="subtitle1">Instructions</Typography>
           <img src={bookIcon} alt={"instructions icon"}/>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <Typography variant="body1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Typography>
         </Details>
         <Details>
-          <h2>Output Amount(s)</h2>
+          <Typography variant="subtitle1">Output Amount(s)</Typography>
           <img src={inventoryIcon} alt={"chemical output amount icon"}/> 
-          <p>DNA <span>20mg</span></p>
+          <Typography variant="body1">DNA <span>20mg</span></Typography>
         </Details>
       </div>
     </Layout>

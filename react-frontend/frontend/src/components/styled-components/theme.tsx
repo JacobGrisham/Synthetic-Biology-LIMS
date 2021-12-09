@@ -11,22 +11,12 @@ const GlobalStyle = createGlobalStyle`
 
   html {
     box-sizing: border-box;
-    font-size: 62.5%; // 10px as font-size. 10px/16px = 62.5%. 1rem = 10px //
-
-    @media only screen and (max-width: 768px) {
-      font-size: 57.5%;
-    }
-
-    @media only screen and (max-width: 425px) {
-      font-size: 52.5%;
-    }
   }
 
   body {
     box-sizing: border-box;
     overflow-x: hidden;
     font-family: 'Lato-Regular';
-    line-height: 4.2rem;
     color: rgb(68, 90, 99);
   }
 

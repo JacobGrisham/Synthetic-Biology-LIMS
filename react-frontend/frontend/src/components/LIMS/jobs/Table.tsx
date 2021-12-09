@@ -7,6 +7,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Typography from '@mui/material/Typography';
 
 interface ColumnDetails {
   [key: string]: string
@@ -17,16 +18,19 @@ const SimpleTable = () => {
   const data = React.useMemo<ColumnDetails[]>(
     () => [
       {
-        col1: 'Hello',
-        col2: 'World',
+        col1: 'Job 1',
+        col2: 'Job 4',
+        col3: 'Job 5',
       },
       {
-        col1: 'react-table',
-        col2: 'rocks',
+        col1: 'Job 2',
+        col2: 'Job 6',
+        col3: '...',
       },
       {
-        col1: 'whatever',
-        col2: 'you want',
+        col1: 'Job 3',
+        col2: '...',
+        col3: '...',
       },
     ],
     []
@@ -35,12 +39,16 @@ const SimpleTable = () => {
   const columns = React.useMemo(
     () => [
       {
-        Header: 'Column 1',
+        Header: 'Running',
         accessor: 'col1', // accessor is the "key" in the data
       },
       {
-        Header: 'Column 2',
+        Header: 'Pending',
         accessor: 'col2',
+      },
+      {
+        Header: 'Delayed',
+        accessor: 'col3',
       },
     ],
     []

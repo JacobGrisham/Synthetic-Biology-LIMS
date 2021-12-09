@@ -1,20 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
+import Typography from '@mui/material/Typography';
 
 const Layout = styled.div `
   grid-area: Metadata;
-  line-height: 2.2rem;
   align-self: center;
 `
 
-const Metadata = () => {
+export default function Metadata() {
   return (
     <Layout>
-        <p>Created By: <span>Jacob Grisham</span></p>
-        <p>Created On: <time dateTime="2021-11-14 20:00">2021-11-14 20:00</time></p>
-        <p>Last Modified: <time dateTime="2021-11-15 20:00">2021-11-15 20:00</time></p>
+        <Typography variant="body2">Created By: <span>Jacob Grisham</span></Typography>
+        <Typography variant="body2">Created On: <time dateTime="2021-11-14 20:00">2021-11-14 20:00</time></Typography>
+        <Typography variant="body2">Last Modified: <time dateTime="2021-11-15 20:00">2021-11-15 20:00</time></Typography>
     </Layout>
   )
 }
-
-export default Metadata;

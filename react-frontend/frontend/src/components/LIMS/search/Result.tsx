@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import Typography from '@mui/material/Typography';
 
 const InfoButton = styled.button `
   display: grid;
   row-gap: 9px;
   max-width: 540px;
   height: 128px;
-  padding: 1.2rem 8rem;
+  padding: 15px 30px;
   text-decoration: none;
   text-align: left;
   border-radius: 0.5rem;
@@ -20,6 +21,7 @@ const InfoButton = styled.button `
   &:focus {
     border-color: rgb(144, 202, 249);
     color: rgb(144, 202, 249);
+    cursor: pointer;
   }
 
   &:active {
@@ -32,8 +34,10 @@ const Result = () => {
   return (
     <li>
       <InfoButton>
-        <h3>Reverse Transcriptase</h3>
-        <p>DNA polymerase enzyme that transcribes single-stranded RNA into DNA. This enzyme is able to synthesize a double helix DNA once the RNA has been reverse transcribed in a first step into a single-strand DNA</p>
+        <Typography variant="h6">Reverse Transcriptase</Typography>
+        <Typography variant="body1">
+          DNA polymerase enzyme that transcribes single-stranded RNA into DNA...
+        </Typography>
       </InfoButton>
     </li>
   )

@@ -2,31 +2,34 @@ import React from 'react';
 import styled from 'styled-components';
 import ButtonOutline from '../buttons/ButtonOutline';
 import Metadata from '../microcomponents/Metadata';
+import Links from '../microcomponents/Links';
 import HistoryList from '../microcomponents/HistoryList';
-import barcodeIcon from '../../assets/images/barcode-icon.svg';
-import freezerIcon from '../../assets/images/freezer-icon.svg';
-import shelfIcon from '../../assets/images/shelf-icon.svg';
-import boxIcon from '../../assets/images/box-icon.svg';
-import wellPlateIcon from '../../assets/images/well-plate-icon.svg';
-import {ReactComponent as Chemical} from '../../assets/images/inventory-icon.svg';
+import barcodeIcon from '../../../assets/images/barcode-icon.svg';
+import freezerIcon from '../../../assets/images/freezer-icon.svg';
+import shelfIcon from '../../../assets/images/shelf-icon.svg';
+import boxIcon from '../../../assets/images/box-icon.svg';
+import wellPlateIcon from '../../../assets/images/well-plate-icon.svg';
+import {ReactComponent as Chemical} from '../../../assets/images/inventory-icon.svg';
+import Typography from '@mui/material/Typography';
 
 const Layout = styled.section `
   overflow-y: scroll;
   height: calc(100vh - 1rem);
   display: grid;
   padding: 1rem 2rem 0 4rem;
-  grid-template-columns: repeat(3, minmax(10px, 1fr));
-  grid-template-rows: repeat(4, min-content) repeat(2, minmax(10px, 1fr));
-  row-gap: 1rem;
+  grid-template-columns: repeat(2, minmax(10px, 1fr));
+  grid-template-rows: repeat(4, min-content) repeat(2, minmax(min-content, 1fr));
+  row-gap: 2rem;
+  column-gap: 1rem;
   grid-template-areas: 
-    "Name Name . Metadata"
-    "Barcode Barcode . History"
-    "Location Location . History"
-    "Amount Amount . History"
-    "Description Description Description History"
-    "Links Links . History";
+    "Name Name Metadata"
+    "Barcode Barcode History"
+    "Location Location History"
+    "Amount Amount History"
+    "Description Description History"
+    "Links Links History";
   
-  & div h2 {
+  & div h6 {
     font-weight: 300;
   }
 `
@@ -51,7 +54,7 @@ const Barcode = styled.div `
   grid-template-rows: repeat(2, min-content);
   column-gap: 2rem;
 
-  & > h2 {
+  & > h6 {
     grid-column: 1 / -1;
   }
 
@@ -69,7 +72,7 @@ const Location = styled.div `
   grid-template-rows: max-content minmax(10px, 1fr) max-content;
   column-gap: 2rem;
 
-  & > h2 {
+  & > h6 {
     grid-column: 1 / -1;
   }
 
@@ -99,7 +102,7 @@ const Amount = styled.div `
   grid-template-rows: max-content repeat(2, minmax(10px, 1fr));
   column-gap: 2rem;
 
-  & > h2 {
+  & > h6 {
     grid-column: 1 / -1;
   }
 
@@ -114,11 +117,6 @@ const Amount = styled.div `
 
 const Description = styled.div `
   grid-area: Description;
-  line-height: 3.2rem;
-`
-
-const Links = styled.div `
-  grid-area: Links;
 `
 
 const History = styled.div `
@@ -129,77 +127,70 @@ const Inventory = () => {
   return (
     <Layout>
       <Name>
-        <h2>Name</h2>
-        <h2>Reverse Transcriptase</h2>
+        <Typography variant="h6" gutterBottom>Name</Typography>
+        <Typography variant="h6" gutterBottom>Reverse Transcriptase</Typography>
         <ButtonOutline text={'Edit'} />
       </Name>
 
       <Barcode>
-        <h2>Barcode</h2>
+        <Typography variant="h6" gutterBottom>Barcode</Typography>
         <img src={barcodeIcon} alt={"barcode icon"}/>
-        <p>98723490238</p>
+        <Typography variant="body1">98723490238</Typography>
       </Barcode>
 
       <Location>
-        <h2>Location</h2>
+        <Typography variant="h6" gutterBottom>Location</Typography>
         <div>
-          <h4>Freezer</h4>
+          <Typography variant="subtitle1">Freezer</Typography>
           <img src={freezerIcon} alt={"freezer icon"}/> 
-          <p>20</p>
+          <Typography variant="body1">20</Typography>
         </div>
         <div>
-          <h4>Shelf</h4>
+          <Typography variant="subtitle1">Shelf</Typography>
           <img src={shelfIcon} alt={"shelf icon"}/>
-          <p>4</p>
+          <Typography variant="body1">4</Typography>
         </div>
         <div>
-          <h4>Box</h4>
+          <Typography variant="subtitle1">Box</Typography>
           <img src={boxIcon} alt={"box icon"}/>
-          <p>25</p>
+          <Typography variant="body1">25</Typography>
         </div>
         <div>
-          <h4>Well Plate</h4>
+          <Typography variant="subtitle1">Well Plate</Typography>
           <img src={wellPlateIcon} alt={"well plate icon"}/>
-          <p>8</p>
+          <Typography variant="body1">8</Typography>
         </div>
-        <p>F20.4.25.8</p>
+        <Typography variant="body1">F20.S4.B25.W8</Typography>
       </Location>
 
       <Amount>
-        <h2>Amount</h2>
+        <Typography variant="h6" gutterBottom>Amount</Typography>
         <Chemical />
         <div>
-          <h4>Stockpile Goal</h4>
-          <p>1200mg</p>
+          <Typography variant="subtitle1">Stockpile Goal</Typography>
+          <Typography variant="body1">1200mg</Typography>
         </div>
         <div>
-          <h4>Current Total</h4>
-          <p>200mg</p>
+          <Typography variant="subtitle1">Current Total</Typography>
+          <Typography variant="body1">200mg</Typography>
         </div>
         <div>
-          <h4>Type</h4>
-          <p>Enzyme</p>
+          <Typography variant="subtitle1">Type</Typography>
+          <Typography variant="body1">Enzyme</Typography>
         </div>
       </Amount>
 
       <Description>
-        <h2>Description</h2>
-        <p>DNA polymerase enzyme that transcribes single-stranded RNA into DNA. This enzyme is able to synthesize a double helix DNA once the RNA has been reverse transcribed in a first step into a single-strand DNA. RNA viruses, such as retroviruses, use the enzyme to reverse-transcribe their RNA genomes into DNA, which is then integrated into the host genome and replicated along with it. During the replication of some DNA viruses, such as the hepadnaviruses or pararetroviruses, also carrying a RT, the DNA genome is transcribed to RNA that serves as a template to make new viral DNA strands.</p>
+        <Typography variant="h6" gutterBottom>Description</Typography>
+        <Typography variant="body1">DNA polymerase enzyme that transcribes single-stranded RNA into DNA. This enzyme is able to synthesize a double helix DNA once the RNA has been reverse transcribed in a first step into a single-strand DNA. RNA viruses, such as retroviruses, use the enzyme to reverse-transcribe their RNA genomes into DNA, which is then integrated into the host genome and replicated along with it. During the replication of some DNA viruses, such as the hepadnaviruses or pararetroviruses, also carrying a RT, the DNA genome is transcribed to RNA that serves as a template to make new viral DNA strands.</Typography>
       </Description>
 
-      <Links>
-        <h2>Links</h2>
-        <ul>
-          <li>
-            <a href='https://www.sciencedirect.com/topics/neuroscience/reverse-transcriptase'>https://www.sciencedirect.com/topics/neuroscience/reverse-transcriptase</a>
-          </li>
-        </ul>
-      </Links>
+      <Links />
 
       <Metadata />
 
       <History>
-        <h2>History</h2>
+        <Typography variant="h6" gutterBottom>History</Typography>
         <HistoryList />
       </History>
 

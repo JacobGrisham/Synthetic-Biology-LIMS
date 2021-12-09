@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import ButtonSolid from './ButtonSolid';
+import ButtonSolid from '../buttons/ButtonSolid';
+import Typography from '@mui/material/Typography';
 
 const ListItem = styled.li `
   display: grid;
@@ -15,8 +16,8 @@ const ListItem = styled.li `
 const JobListItem = () => {
   return (
     <ListItem>
-      <ButtonSolid text={'View Job'} />
-      <p>DNA Synthesis</p>
+      <ButtonSolid text={'VIEW JOB'} />
+      <Typography variant="body1">DNA Synthesis</Typography>
     </ListItem>
   )
 }
