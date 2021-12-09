@@ -41,7 +41,7 @@ const ProtocolStepForm = () => {
     <Layout open>
       <summary>Step 1</summary>
 
-      <IconButton src={addIcon} alt={"add icon"} />
+      <IconButton key={40} tooltip={'Add Protocol Step'} src={addIcon} alt={"add icon"} />
 
       <div>
         <Details>

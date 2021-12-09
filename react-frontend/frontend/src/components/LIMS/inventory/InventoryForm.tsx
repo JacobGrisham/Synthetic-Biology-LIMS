@@ -100,7 +100,7 @@ const InventoryForm = () => {
 
         <Links>
           <legend>Links</legend>
-          <IconButton src={addIcon} alt={"add icon"} />
+          <IconButton key={10} tooltip={'Add Link'} src={addIcon} alt={"add icon"} />
           <ul>
             <li>
               <input name='link' type='text' placeholder='https://www.sciencedirect.com/topics/neuroscience/reverse-transcriptase' />

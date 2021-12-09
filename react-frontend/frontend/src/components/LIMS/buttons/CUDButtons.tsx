@@ -17,9 +17,9 @@ const Buttons = styled.div `
 const CreateUpdateDeleteButtons = () => {
   return (
     <Buttons>
-      <IconButton src={saveIcon} alt={"save icon"} />
-      <IconButton src={cancelIcon} alt={"cancel icon"} />
-      <IconButton src={deleteIcon} alt={"delete icon"} />
+      <IconButton key={10} tooltip={'Save'} src={saveIcon} alt={"save icon"} />
+      <IconButton key={11} tooltip={'Cancel'} src={cancelIcon} alt={"cancel icon"} />
+      <IconButton key={12} tooltip={'Delete'} src={deleteIcon} alt={"delete icon"} />
     </Buttons>
   )
 }
