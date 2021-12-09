@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {ReactComponent as Logo} from '../assets/images/logo.svg';
+import {ReactComponent as Logo} from '../../assets/images/logo.svg';
 
 const StyledNavBar = styled.nav `
   margin: 2rem 3.2rem;
