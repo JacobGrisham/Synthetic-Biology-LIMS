@@ -1,8 +1,8 @@
 import React, { memo } from 'react';
 import styled from 'styled-components';
 import Units from './Units';
-import dispenseIcon from '../../assets/images/dispense-icon.svg';
-import rulerIcon from '../../assets/images/ruler-icon.svg';
+import dispenseIcon from '../../../assets/images/dispense-icon.svg';
+import rulerIcon from '../../../assets/images/ruler-icon.svg';
 
 interface IDispenseProps {
   searchChange(event: React.SyntheticEvent<HTMLInputElement>): void;

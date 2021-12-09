@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import Units from './Units';
-import barcodeIcon from '../../assets/images/barcode-icon.svg';
-import freezerIcon from '../../assets/images/freezer-icon.svg';
-import shelfIcon from '../../assets/images/shelf-icon.svg';
-import boxIcon from '../../assets/images/box-icon.svg';
-import wellPlateIcon from '../../assets/images/well-plate-icon.svg';
-import {ReactComponent as Chemical} from '../../assets/images/inventory-icon.svg';
+import barcodeIcon from '../../../assets/images/barcode-icon.svg';
+import freezerIcon from '../../../assets/images/freezer-icon.svg';
+import shelfIcon from '../../../assets/images/shelf-icon.svg';
+import boxIcon from '../../../assets/images/box-icon.svg';
+import wellPlateIcon from '../../../assets/images/well-plate-icon.svg';
+import {ReactComponent as Chemical} from '../../../assets/images/inventory-icon.svg';
 
 const Layout = styled.section `
   overflow-y: scroll;

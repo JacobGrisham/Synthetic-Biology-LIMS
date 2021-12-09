@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import IconButton from '../buttons/IconButton';
 import Units from '../inventory/Units';
-import inventoryIcon from '../../assets/images/inventory-icon.svg';
+import {ReactComponent as Chemical} from '../../../assets/images/inventory-icon.svg';
 
 type IButtonProps = {
   title: string
@@ -32,7 +31,7 @@ const ProtocolChemicalInputField = (props: IButtonProps) => {
   return (
     <Amount>
       <legend>{props.title} Amount</legend>
-      <IconButton src={inventoryIcon} alt={"chemical icon"} />
+      <Chemical />
       <div>
         <input name='amount' type='number' min='0' placeholder='1200' />
         <Units />
