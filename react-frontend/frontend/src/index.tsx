@@ -10,6 +10,8 @@ import { requestCompanies } from './redux/reducers/reducers';
 // Redux Middleware
 import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
+// React-Router
+import { BrowserRouter } from "react-router-dom";
 // Components
 import App from './components/App';
 
@@ -21,7 +23,9 @@ const store = createStore(rootRedcuer, applyMiddleware(thunkMiddleware, logger))
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root') as HTMLElement
