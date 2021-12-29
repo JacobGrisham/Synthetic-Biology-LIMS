@@ -1,7 +1,12 @@
 // My React Components
 import Project from '../components/LIMS/projects/Project';
+import Job from '../components/LIMS/jobs/Job';
+import JobForm from '../components/LIMS/jobs/JobForm';
 import Protocol from '../components/LIMS/protocols/Protocol';
 import Inventory from '../components/LIMS/inventory/Inventory';
+import ProjectForm from '../components/LIMS/projects/ProjectForm';
+import ProtocolForm from '../components/LIMS/protocols/ProtocolForm';
+import InventoryForm from '../components/LIMS/inventory/InventoryForm';
 import ComingSoon from '../components/LIMS/microcomponents/ComingSoon';
 // Icons
 import Home from '../assets/images/logo-icon.svg';
@@ -24,7 +29,7 @@ export const REQUEST_COMPANIES_PENDING = 'REQUEST_COMPANIES_PENDING';
 export const REQUEST_COMPANIES_SUCCESS = 'REQUEST_COMPANIES_SUCCESS';
 export const REQUEST_COMPANIES_FAILED = 'REQUEST_COMPANIES_FAILED';
 
-const routes = [
+export const routes = [
   { path: 'home/',
     name: 'Home',
     icon: Home,
@@ -93,4 +98,29 @@ const routes = [
   },
 ]
 
-export default routes
+export const nestedRoutes = [
+  { path: 'inventory/add',
+    component: () => <InventoryForm />
+  },
+  { path: 'protocols/add',
+    component: () => <ProtocolForm />
+  },
+  { path: 'projects/add',
+    component: () => <ProjectForm />
+  },
+  { path: 'projects/job',
+  component: () => <Job />
+  },
+  { path: 'projects/job/certify',
+  component: () => <JobForm />
+  },
+  { path: 'inventory/edit',
+  component: () => <InventoryForm />
+  },
+  { path: 'protocols/edit',
+    component: () => <ProtocolForm />
+  },
+  { path: 'projects/edit',
+    component: () => <ProjectForm />
+  },
+]
