@@ -9,11 +9,11 @@ import { styled  as materialuistyled } from '@mui/material/styles';
 import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
 import Zoom from '@mui/material/Zoom';
 // Constants
-import routes from '../../../constants/constants';
+import { routes } from '../../../constants/constants';
 
 
 const List = styled.ul `
-  grid-column: navbar / search-results;
+  grid-column: navbar / drawer;
   display: grid;
   grid-template-rows: repeat(13, 1fr);
   place-items: stretch;
@@ -24,10 +24,19 @@ const List = styled.ul `
   list-style: none;
 `
 
-const ListItem = styled.li `
+interface IActiveProp {
+  active?: boolean;
+}
+
+const ListItem = styled.li<IActiveProp> `
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: ({ active }) => active ? 'rgb(144, 202, 249)' : rgb(210, 233, 252);
+
+  &:hover {
+    background-color: rgb(144, 202, 249);
+  }
 `
 
 const MUIListItem = styled(ListItemButton)({
@@ -51,8 +60,11 @@ const LightTooltip = materialuistyled(({ className, ...props }: TooltipProps) =>
   },
 }));
 
+interface INavProps {
+  onHandleOpen: Function;
+}
 
-const NavBar = () => {
+const NavBar: React.FC<INavProps> = (props) => {
   const [selectedIndex, setSelectedIndex] = useState(1);
 
   const handleListItemClick = (
@@ -60,6 +72,7 @@ const NavBar = () => {
     num: number,
   ) => {
     setSelectedIndex(num);
+    props.onHandleOpen();
   };
 
   return (
