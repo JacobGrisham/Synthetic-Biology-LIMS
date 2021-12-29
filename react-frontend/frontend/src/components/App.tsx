@@ -1,9 +1,16 @@
-// The main job of this React component is to connect React to Redux
+// The main job of this React component is to connect React to Redux and to add routes for the landing, login/register, and LIMS
 
 // React
 import React from 'react';
-import LIMS from './LIMS/LIMS'
-import ErrorBoundary from './ErrorBoundary'
+// React Router
+import { Routes, Route } from "react-router-dom";
+// My React Components
+import ErrorBoundary from './ErrorBoundary';
+import LIMS from './LIMS/LIMS';
+import Home from './home/Home';
+import Register from './home/Register';
+import LogIn from './home/LogIn';
+import FouOFour from './LIMS/microcomponents/404';
 // Redux
 // import { AnyAction } from 'redux';
 // import { ThunkDispatch } from 'redux-thunk';
@@ -44,7 +51,12 @@ import ErrorBoundary from './ErrorBoundary'
 const App = () => {
   return (
     <ErrorBoundary>
-      <LIMS />
+      <Routes>
+        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/*" element={<LIMS />} />
+        <Route path="/Register" element={<Register />} />
+        <Route path="/Login" element={<LogIn />} />
+      </Routes>
     </ErrorBoundary>
   );
 }
