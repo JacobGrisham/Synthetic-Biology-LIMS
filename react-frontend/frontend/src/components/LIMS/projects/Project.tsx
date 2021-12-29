@@ -1,45 +1,69 @@
 import React from 'react';
-import { Link as RouterLink } from "react-router-dom";
+// React Router
+import { Link, useLocation } from "react-router-dom";
+// Styled Components
 import styled from 'styled-components';
-import ButtonOutline from '../buttons/ButtonOutline';
+import { CombinedStyledLayout } from '../../styled-components/workspace-layout';
+import { device } from '../../styled-components/responsive';
+// Material UI
+import Typography from '@mui/material/Typography';
+// My React Components
+import ButtonPropped from '../../ButtonPropped';
 import JobListItem from '../jobs/JobListItem';
 import Table from '../jobs/Table';
 import Metadata from '../microcomponents/Metadata';
 import HistoryList from '../microcomponents/HistoryList';
 import Links from '../microcomponents/Links';
-import Typography from '@mui/material/Typography';
 
-const Layout = styled.section `
-  overflow-y: scroll;
-  height: calc(100vh - 1rem);
-  display: grid;
-  padding: 1rem 2rem 0 4rem;
-  grid-template-columns: repeat(2, minmax(10px, 1fr));
-  grid-template-rows: repeat(4, min-content) repeat(2, minmax(min-content, 1fr));
-  row-gap: 2rem;
-  column-gap: 1rem;
+const Layout = styled(CombinedStyledLayout) `
+  grid-template-columns: minmax(10px, 1fr);
+  grid-template-rows: repeat(7, max-content);
   grid-template-areas: 
-    "Name Name Metadata"
-    "Description Description History"
-    "Jobs Jobs History"
-    "ProtocolStatus ProtocolStatus History"
-    "Links Links History";
-  
-  & div h6 {
-    font-weight: 300;
+    "Name"
+    "Description"
+    "Jobs"
+    "ProtocolStatus"
+    "Links"
+    "Metadata"
+    "History";
+
+  @media ${device.laptop} {
+    grid-template-columns: repeat(2, minmax(10px, 1fr));
+    grid-template-rows: repeat(4, min-content) repeat(2, minmax(min-content, 1fr));
+    grid-template-areas: 
+      "Name Name Metadata"
+      "Description Description History"
+      "Jobs Jobs History"
+      "ProtocolStatus ProtocolStatus History"
+      "Links Links History";
   }
 `
 
 const Name = styled.div `
   grid-area: Name;
   display: grid;
-  grid-template-columns: repeat(3, minmax(10px, 1fr));
-  grid-template-rows: repeat(2, min-content);
+  grid-template-columns: minmax(10px, 1fr);
+  grid-template-rows: repeat(4, min-content);
+  
+  @media ${device.mobileL} {
+    grid-template-columns: repeat(2, minmax(10px, 1fr));
+    grid-template-rows: repeat(2, min-content);
 
-  & > a {
-    grid-row: 1 / -1;
-    grid-column: 3 / 4;
-    place-self: center;
+    & > a {
+      margin-top: 1rem;
+    }
+  }
+
+  @media ${device.laptopL} {
+    grid-template-columns: repeat(3, minmax(10px, 1fr));
+    grid-template-rows: repeat(2, min-content);
+  
+    & > a {
+      grid-row: 1 / -1;
+      grid-column: 3 / 4;
+      place-self: center;
+      margin-top: 0;
+    }
   }
 `
 
@@ -60,17 +84,18 @@ const History = styled.div `
 `
 
 const JobStatus = () => {
+  let location = useLocation();
 
   return (
     <Layout>
       <Name>
-        <Typography variant="h6" gutterBottom>Name</Typography>
-        <Typography variant="h6" gutterBottom>BioFuel</Typography>
-        <Typography variant="h6" gutterBottom>Status</Typography>
-        <Typography variant="body1">In Progress</Typography>
-        <RouterLink to='/Edit'>
-          <ButtonOutline text={'EDIT'} />
-        </RouterLink>
+        <Typography id="name-title" variant="h6" gutterBottom>Name</Typography>
+        <Typography id="status-title" variant="h6" gutterBottom>Status</Typography>
+        <Typography id="name" variant="h6" gutterBottom>BioFuel</Typography>
+        <Typography id="status" variant="body1">In Progress</Typography>
+        <Link to={`${location.pathname}/Edit`}>
+          <ButtonPropped xpadding={1.2} ypadding={1.5} width={10} text={'EDIT'} />
+        </Link>
       </Name>
 
       <Description>

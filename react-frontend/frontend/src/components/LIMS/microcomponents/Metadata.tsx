@@ -1,10 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
+import { device } from '../../styled-components/responsive';
 import Typography from '@mui/material/Typography';
 
 const Layout = styled.div `
   grid-area: Metadata;
-  align-self: center;
+  align-self: start;
+  margin-top: 0.3rem;
+
+  @media ${device.laptopL} {
+    align-self: center;
+    margin-top: 0;
+  }
 `
 
 export default function Metadata() {

@@ -1,42 +1,61 @@
 import React from 'react';
+// React Router
+import { Link, useLocation } from "react-router-dom";
+// Styled Components
 import styled from 'styled-components';
+import { CombinedStyledLayout } from '../../styled-components/workspace-layout';
+import { device } from '../../styled-components/responsive';
+// Material UI
+import Typography from '@mui/material/Typography';
+// My React Components
 import ProtocolStep from './ProtocolStep';
-import ButtonOutline from '../buttons/ButtonOutline';
+import ButtonPropped from '../../ButtonPropped';
 import Metadata from '../microcomponents/Metadata';
 import HistoryList from '../microcomponents/HistoryList';
 import Links from '../microcomponents/Links';
-import Typography from '@mui/material/Typography';
 
-const Layout = styled.section `
-  overflow-y: scroll;
-  height: calc(100vh - 1rem);
-  display: grid;
-  padding: 1rem 2rem 0 4rem;
-  grid-template-columns: repeat(2, minmax(10px, 1fr));
-  grid-template-rows: repeat(2, min-content) minmax(min-content, 1fr) min-content;
-  row-gap: 2rem;
-  column-gap: 1rem;
+const Layout = styled(CombinedStyledLayout) `
+  grid-template-columns: minmax(10px, 1fr);
+  grid-template-rows: repeat(6, max-content);
   grid-template-areas: 
-    "Name Name Metadata"
-    "Description Description History"
-    "Protocols Protocols History"
-    "Links Links History";
-  
-  & div h6 {
-    font-weight: 300;
+    "Name"
+    "Description"
+    "Protocols"
+    "Links"
+    "Metadata"
+    "History";
+
+  @media ${device.laptop} {
+    grid-template-columns: repeat(2, minmax(10px, 1fr));
+    grid-template-rows: repeat(2, min-content) minmax(min-content, 1fr) min-content;
+    grid-template-areas: 
+      "Name Name Metadata"
+      "Description Description History"
+      "Protocols Protocols History"
+      "Links Links History";
   }
 `
 
 const Name = styled.div `
   grid-area: Name;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, min-content);
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, min-content);
 
-  & > button {
-    grid-row: 1 / -1;
-    grid-column: 2 / 3;
-    place-self: center;
+  & > a {
+    margin-top: 1rem;
+  }
+
+  @media ${device.tablet} {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, min-content);
+
+    & > a {
+      grid-row: 1 / -1;
+      grid-column: 2 / 3;
+      place-self: center;
+      margin-top: 0;
+    }
   }
 `
 
@@ -53,12 +72,16 @@ const History = styled.div `
 `
 
 const Protocol = () => {
+  const location = useLocation();
+
   return (
     <Layout>
       <Name>
         <Typography variant="h6" gutterBottom>Name</Typography>
         <Typography variant="h6" gutterBottom>DNA Synthesis</Typography>
-        <ButtonOutline text={'Edit'} />
+        <Link to={`${location.pathname}/Edit`}>
+          <ButtonPropped xpadding={1.2} ypadding={1.5} width={10} text={'EDIT'} />
+        </Link>
       </Name>
 
       <Description>

@@ -1,49 +1,72 @@
 import React from 'react';
+// Styled Components
 import styled from 'styled-components';
-import ButtonOutline from '../buttons/ButtonOutline';
+import { CombinedStyledLayout } from '../../styled-components/workspace-layout';
+import { device } from '../../styled-components/responsive';
+// React Router
+import { Link, useLocation } from "react-router-dom";
+// Material UI
+import Typography from '@mui/material/Typography';
+// My React Components
+import ButtonPropped from '../../ButtonPropped';
 import Metadata from '../microcomponents/Metadata';
 import Links from '../microcomponents/Links';
 import HistoryList from '../microcomponents/HistoryList';
+// Assets
 import barcodeIcon from '../../../assets/images/barcode-icon.svg';
 import freezerIcon from '../../../assets/images/freezer-icon.svg';
 import shelfIcon from '../../../assets/images/shelf-icon.svg';
 import boxIcon from '../../../assets/images/box-icon.svg';
 import wellPlateIcon from '../../../assets/images/well-plate-icon.svg';
 import {ReactComponent as Chemical} from '../../../assets/images/inventory-icon.svg';
-import Typography from '@mui/material/Typography';
 
-const Layout = styled.section `
-  overflow-y: scroll;
-  height: calc(100vh - 1rem);
-  display: grid;
-  padding: 1rem 2rem 0 4rem;
-  grid-template-columns: repeat(2, minmax(10px, 1fr));
-  grid-template-rows: repeat(4, min-content) repeat(2, minmax(min-content, 1fr));
-  row-gap: 2rem;
-  column-gap: 1rem;
-  grid-template-areas: 
-    "Name Name Metadata"
-    "Barcode Barcode History"
-    "Location Location History"
-    "Amount Amount History"
-    "Description Description History"
-    "Links Links History";
-  
-  & div h6 {
-    font-weight: 300;
-  }
+const Layout = styled(CombinedStyledLayout) `
+  grid-template-columns: minmax(10px, 1fr);
+  grid-template-rows: repeat(8, max-content);
+  grid-template-areas:
+    "Name"
+    "Barcode"
+    "Description"
+    "Location"
+    "Amount"
+    "Links"
+    "Metadata"
+    "History";
+
+    @media ${device.laptop} {
+      grid-template-columns: repeat(2, minmax(10px, 1fr));
+      grid-template-rows: repeat(4, min-content) repeat(2, minmax(min-content, 1fr));
+      grid-template-areas: 
+        "Name Name Metadata"
+        "Barcode Barcode History"
+        "Location Location History"
+        "Amount Amount History"
+        "Description Description History"
+        "Links Links History";
+    }
 `
 
 const Name = styled.div `
   grid-area: Name;
   display: grid;
-  grid-template-columns: repeat(2, minmax(10px, 1fr));
-  grid-template-rows: repeat(2, min-content);
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, min-content);
 
-  & > button {
-    grid-row: 1 / -1;
-    grid-column: 2 / 3;
-    place-self: center;
+  & > a {
+    grid-row: 3 / 4;
+    margin-top: 1rem;
+  }
+
+  @media ${device.tablet} {
+    grid-template-columns: repeat(2, minmax(10px, 1fr));
+    grid-template-rows: repeat(2, min-content);
+
+    & > a {
+      grid-row: 1 / -1;
+      grid-column: 2 / 3;
+      place-self: center;
+      margin-top: 0;
+    }
   }
 `
 
@@ -68,7 +91,7 @@ const Barcode = styled.div `
 const Location = styled.div `
   grid-area: Location;
   display: grid;
-  grid-template-columns: repeat(8, minmax(30px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
   grid-template-rows: max-content minmax(10px, 1fr) max-content;
   column-gap: 2rem;
 
@@ -98,7 +121,7 @@ const Location = styled.div `
 const Amount = styled.div `
   grid-area: Amount;
   display: grid;
-  grid-template-columns: repeat(4, minmax(30px, 1fr));
+  grid-template-columns: max-content repeat(3, minmax(30px, 1fr));
   grid-template-rows: max-content repeat(2, minmax(10px, 1fr));
   column-gap: 2rem;
 
@@ -124,12 +147,16 @@ const History = styled.div `
 `
 
 const Inventory = () => {
+  const location = useLocation();
+
   return (
     <Layout>
       <Name>
         <Typography variant="h6" gutterBottom>Name</Typography>
+        <Link to={`${location.pathname}/Edit`}>
+          <ButtonPropped xpadding={1.2} ypadding={1.5} width={10} text={'Edit'} />
+        </Link>
         <Typography variant="h6" gutterBottom>Reverse Transcriptase</Typography>
-        <ButtonOutline text={'Edit'} />
       </Name>
 
       <Barcode>

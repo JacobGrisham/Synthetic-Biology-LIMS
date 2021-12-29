@@ -81,7 +81,7 @@ const SearchBox = ({ searchChange }: IDispenseProps) => {
         <Input width={11.5} name='amount' type='number' min='0' placeholder='Amount' onChange={ searchChange } />
       </FlexBox>
 
-      <Units />
+      <Units unitsfor='dispense' />
 
       <Button type='submit'>Dispense</Button>
     </Form>

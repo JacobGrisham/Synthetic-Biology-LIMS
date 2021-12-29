@@ -5,8 +5,7 @@ import Typography from '@mui/material/Typography';
 const InfoButton = styled.button `
   display: grid;
   row-gap: 9px;
-  max-width: 540px;
-  height: 128px;
+  max-width: 768px;
   padding: 15px 30px;
   text-decoration: none;
   text-align: left;

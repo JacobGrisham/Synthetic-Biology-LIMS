@@ -6,6 +6,7 @@ const OrderedList = styled.ol `
   overflow-y: scroll;
   display: grid;
   row-gap: 2px;
+  grid-template-columns: minmax(max-content, 250px);
 `
 
 const Box = styled.li `

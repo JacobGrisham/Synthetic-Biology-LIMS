@@ -24,7 +24,7 @@ const Details = styled.div `
   grid-template-columns: max-content minmax(30px, 1fr);
   column-gap: 2rem;
 
-  & > h2 {
+  & > h6 {
     grid-column: span 2;
   }
 

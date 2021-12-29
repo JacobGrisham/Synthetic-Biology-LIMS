@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link, useLocation } from "react-router-dom";
 import styled from 'styled-components';
-import ButtonSolid from '../buttons/ButtonSolid';
+import ButtonPropped from '../../ButtonPropped';
 import Typography from '@mui/material/Typography';
 
 const ListItem = styled.li `
@@ -14,9 +15,13 @@ const ListItem = styled.li `
 `
 
 const JobListItem = () => {
+  let location = useLocation();
+
   return (
     <ListItem>
-      <ButtonSolid text={'VIEW JOB'} />
+      <Link to={`${location.pathname}/Job`}>
+        <ButtonPropped xpadding={1} ypadding={1.5} width={10} primary text={'VIEW JOB'} />
+      </Link>
       <Typography variant="body1">DNA Synthesis</Typography>
     </ListItem>
   )
