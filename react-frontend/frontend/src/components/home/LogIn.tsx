@@ -1,4 +1,6 @@
 import * as React from 'react';
+// React Router
+import { Link as RouterLink} from "react-router-dom";
 import {ReactComponent as Logo} from '../../assets/images/logo.svg';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -25,7 +27,7 @@ function Copyright(props: any) {
 
 const theme = createTheme();
 
-export default function SignIn() {
+const LogIn: React.FC<{}> = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -49,7 +51,7 @@ export default function SignIn() {
           }}
         >
           <Logo />
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h4">
             Log in
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -88,9 +90,11 @@ export default function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Register"}
-                </Link>
+                <RouterLink to={'/register'}>
+                  <Link variant="body2">
+                    {"Don't have an account? Register"}
+                  </Link>
+                </RouterLink>
               </Grid>
             </Grid>
           </Box>
@@ -100,3 +104,5 @@ export default function SignIn() {
     </ThemeProvider>
   );
 }
+
+export default LogIn;

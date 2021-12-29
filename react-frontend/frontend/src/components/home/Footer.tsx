@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
-import {ReactComponent as FooterBackground} from '../assets/images/footer-background.svg';
+import {ReactComponent as FooterBackground} from '../../assets/images/footer-background.svg';
 
 const FooterDecoration = styled.div `
   grid-row: footer-decoration-start / footer-decoration-end;
@@ -41,7 +41,7 @@ const Author = styled.a `
   }
 `
 
-const Footer = () => {
+const Footer: React.FC<{}> = () => {
 
   var date = new Date();
   var year = date.getFullYear();

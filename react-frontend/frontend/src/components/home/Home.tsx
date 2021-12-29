@@ -5,7 +5,7 @@ import NavBar from './NavBar';
 import Header from './Header';
 // import CompanyTable from './CompanyTable';
 import Footer from './Footer';
-import Background from '../assets/images/header-background.svg';
+import Background from '../../assets/images/header-background.svg';
 
 // interface IHomeProps {
 //   companies: any;
@@ -21,7 +21,7 @@ const Layout = styled.main`
   background-repeat: no-repeat;
 `
 
-const Home = () => {
+const Home: React.FC<{}> = () => {
 
   // const { companies, isPending, onRequestOfCompanies } = props
 

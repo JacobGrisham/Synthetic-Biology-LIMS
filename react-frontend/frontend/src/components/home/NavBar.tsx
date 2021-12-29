@@ -1,5 +1,11 @@
 import React from 'react';
+// Styled Components
 import styled from 'styled-components';
+// React Router
+import { Link } from "react-router-dom";
+// My React Components
+import ButtonPropped from '../ButtonPropped';
+// Assets
 import {ReactComponent as Logo} from '../../assets/images/logo.svg';
 
 const StyledNavBar = styled.nav `
@@ -12,7 +18,7 @@ const StyledNavBar = styled.nav `
   grid-template-columns: max-content 8fr 45rem 1fr;
 `
 
-const LogoButton = styled.a `
+const LogoButton = styled.div `
   grid-column: 1 / 2;
 `
 
@@ -23,27 +29,24 @@ const Buttons = styled.div `
   align-items: center;
 `
 
-const Button = styled.a `
-  background-color: rgb(33, 133, 208);
-  width: 16rem;
-  padding: 1.2rem 2rem;
-  text-decoration: none;
-  text-align: center;
-  color: white;
-  font-size: 1.9rem;
-  border-radius: 0.5rem;
-`
-
-const NavBar = () => {
+const NavBar: React.FC<{}> = () => {
   return (
     <StyledNavBar>
-      <LogoButton href="/">
-        <Logo />
-      </LogoButton>
+      <Link to={'/'}>
+        <LogoButton>
+          <Logo />
+        </LogoButton>
+      </Link>
+
       <Buttons>
-        <Button href="/register">Register</Button>
-        <Button href="/signin">Log In</Button>
+        <Link to={'/register'}>
+          <ButtonPropped xpadding={1.2} ypadding={1.5} width={10} primary text={'REGISTER'}/>
+        </Link>
+        <Link to={'/login'}>
+          <ButtonPropped xpadding={1.2} ypadding={1.5} width={10} primary text={'LOG IN'}/>
+        </Link>
       </Buttons>
+
     </StyledNavBar>
   )
 }

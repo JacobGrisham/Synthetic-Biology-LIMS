@@ -1,6 +1,11 @@
 import React from 'react';
+// Styled Components
 import styled from 'styled-components';
-import {ReactComponent as HeroImage} from '../assets/images/hero.svg';
+// React Router
+import { Link } from "react-router-dom";
+// My React Components
+import ButtonPropped from '../ButtonPropped';
+import {ReactComponent as HeroImage} from '../../assets/images/hero.svg';
 
 const Hero = styled.header`
   grid-row: hero-start / hero-end;
@@ -62,23 +67,14 @@ const StyledHeroImage = styled.div`
   }
 `
 
-const Button = styled.a `
-  background-color: rgb(33, 133, 208);
-  border-radius: 1rem;
-  padding: 2rem;
-  text-decoration: none;
-  color: white;
-  font-size: 3.2rem;
-  text-align: center;
-  max-width: 25rem;
-`
-
-const Header = () => {
+const Header: React.FC<{}> = () => {
   return (
     <Hero>
       <TitleBox>
         <Title>Synbio LIMase will catalyze your Laboratory Information Management for Synthetic Biology</Title>
-        <Button href="/register">Register</Button>
+        <Link to={'/register'}>
+          <ButtonPropped xpadding={1.5} ypadding={2.5} width={15} primary text={'REGISTER'}/>
+        </Link>
       </TitleBox>
 
       <StyledHeroImage><HeroImage /></StyledHeroImage>
