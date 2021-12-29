@@ -1,12 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+// React Router
+import { Link } from "react-router-dom";
 // Material UI React Components
 import { styled  as materialuistyled } from '@mui/material/styles';
 import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
 import Zoom from '@mui/material/Zoom';
 
-const Button = styled.button `
+const StyledLink = styled(Link) `
 border: none;
+text-decoration: none;
 background-color: transparent;
 padding: 0.7rem;
 
@@ -17,12 +20,11 @@ padding: 0.7rem;
 }
 `
 
-type IButtonProps = {
+type ILinkProps = {
   src: any,
   alt: string;
   tooltip: string;
-  type?: 'submit' | 'reset' | 'button';
-  onClick?: any;
+  to: string;
 }
 
 const LightTooltip = materialuistyled(({ className, ...props }: TooltipProps) => (
@@ -36,14 +38,14 @@ const LightTooltip = materialuistyled(({ className, ...props }: TooltipProps) =>
   },
 }));
 
-const IconButton = (props: IButtonProps) => {
+const IconLink = (props: ILinkProps) => {
   return (
-    <Button onClick={props.onClick} type={props.type}>
+    <StyledLink to={props.to}>
       <LightTooltip title={props.tooltip} placement='right' TransitionComponent={Zoom}>
         <img src={props.src} alt={props.alt}/>
       </LightTooltip>
-    </Button>
+    </StyledLink>
   )
 }
 
-export default IconButton;
+export default IconLink;

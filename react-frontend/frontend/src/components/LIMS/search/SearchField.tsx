@@ -16,7 +16,7 @@ const Input = styled.input `
   border-width: 1px;
   border-style: solid;
   background-color: white;
-  max-width: 20rem;
+  width: 100%;
 `
 
 interface ISearchFieldProps {
