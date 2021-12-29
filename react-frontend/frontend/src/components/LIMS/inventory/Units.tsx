@@ -1,22 +1,24 @@
 import React from 'react';
-import styled from 'styled-components';
+import { Field } from 'formik';
+import MenuItem from '@mui/material/MenuItem';
+import { Select } from 'formik-mui';
 
-const Select = styled.select `
-padding: 1.2rem 0.7rem;
-background-color: white;
-border-radius: 0.5rem;
-border-color: rgb(222, 222, 223);
-border-width: 1px;
-border-style: solid;
-`
+type IUnitsProps = {
+  unitsfor: 'inputAmount' | 'outputAmount' | 'inventory' | 'dispense' | 'product';
+}
 
-const Units = () => {
+const Units = (props: IUnitsProps) => {
   return (
-    <Select name='units'>
-    <option value=''>units</option>
-    <option value='ml'>ml</option>
-    <option value='g'>g</option>
-    </Select>
+    <Field
+    component={Select}
+    autoWidth
+    sx={{ minWidth: 80 }}
+    id={`${props.unitsfor}Units`}
+    name={`${props.unitsfor}Units`}
+    label="Units">
+      <MenuItem value={'ml'}>ml</MenuItem>
+      <MenuItem value={'g'}>g</MenuItem>
+    </Field>
   )
 }
 

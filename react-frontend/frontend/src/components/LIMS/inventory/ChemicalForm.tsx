@@ -1,6 +1,17 @@
 import React from 'react';
+// Styled Components
 import styled from 'styled-components';
+import { device } from '../../styled-components/responsive';
+// Formik
+import {
+  Field,
+  ErrorMessage } from 'formik';
+// Material UI
+import { TextField } from 'formik-mui';
+import Typography from '@mui/material/Typography';
+// My React Components
 import Units from './Units';
+// Assets
 import barcodeIcon from '../../../assets/images/barcode-icon.svg';
 import freezerIcon from '../../../assets/images/freezer-icon.svg';
 import shelfIcon from '../../../assets/images/shelf-icon.svg';
@@ -8,71 +19,43 @@ import boxIcon from '../../../assets/images/box-icon.svg';
 import wellPlateIcon from '../../../assets/images/well-plate-icon.svg';
 import {ReactComponent as Chemical} from '../../../assets/images/inventory-icon.svg';
 
-const Layout = styled.section `
-  overflow-y: scroll;
-  height: calc(100vh - 1rem);
+const Layout = styled.div `
+  grid-area: Chemical;
   display: grid;
-  padding: 1rem 2rem 0 4rem;
-  grid-template-columns: repeat(3, minmax(10px, 1fr));
-  grid-template-rows: repeat(4, min-content) repeat(2, minmax(10px, 1fr));
-  row-gap: 1rem;
+  grid-template-columns: repeat(2, minmax(10px, 1fr));
+  grid-template-rows: repeat(3, max-content);
+  row-gap: 2rem;
   grid-template-areas: 
-    "Name Name . Metadata"
-    "Barcode Barcode . History"
-    "Location Location . History"
-    "Amount Amount . History"
-    "Description Description Description History"
-    "Links Links . History";
+    "Barcode ."
+    "Location Location"
+    "Amount Amount";
   
-  & div h2 {
+  & div h6 {
     font-weight: 300;
   }
 `
 
-const Barcode = styled.fieldset `
+const Barcode = styled.div `
   grid-area: Barcode;
   display: grid;
   grid-template-columns: repeat(2, max-content);
-  grid-template-rows: repeat(2, min-content);
   column-gap: 2rem;
 
-  & > legend {
-    grid-column: 1 / -1;
-  }
-
-  & > input {
-    place-self: center;
+  & > img {
+    align-self: center;
   }
 `
 
-const Location = styled.fieldset `
+const Location = styled.div `
   grid-area: Location;
-  display: grid;
-  grid-template-columns: repeat(8, min-content);
-  grid-template-rows: max-content 1fr max-content;
-  column-gap: 2rem;
-
-  & > legend {
-    grid-column: 1 / -1;
-  }
 
   & > div {
     display: flex;
     flex-wrap: wrap;
   }
 
-  & div div {
-    grid-column: span 2;
-    display: grid;
-    grid-template-columns: subgrid;
-
-    & > label {
-      grid-column: span 2;
-    }
-
-    & > input {
-      grid-column: span 1;
-    }
+  & > div > div {
+    margin-bottom: 0.5rem;
   }
 
   & > p {
@@ -80,77 +63,143 @@ const Location = styled.fieldset `
   }
 `
 
-const Amount = styled.fieldset `
+const Amount = styled.div `
   grid-area: Amount;
   display: grid;
-  grid-template-columns: repeat(4, max-content);
+  grid-template-columns: max-content 1fr;
   grid-template-rows: repeat(3, max-content);
   column-gap: 2rem;
 
-  & > legend, h4 {
+  & > h6 {
     grid-column: 1 / -1;
   }
 
   & > svg {
-    grid-row: span 2;
     align-self: center;
   }
 
-  & > div {
-    grid-row: span 2;
+  & > div:last-child {
+    margin-top: 0.5rem;
+    grid-column: 1 / -1;
+  }
 `
 
-const ChemicalForm = () => {
+const AmountInputs = styled.div `
+  display: grid;
+  row-gap: 1rem;
+
+  @media ${device.laptop} {
+
+    & div {
+      grid-row: 1 / -1;
+    }
+
+    & + div {
+      grid-column: 1 / 2;
+    }
+
+    & div:last-child {
+      grid-column: 2 / 3;
+    }
+  }
+`
+
+type IChemicalFormProps = {
+  amountfor: 'inventory' | 'product',
+}
+
+const ChemicalForm = (props: IChemicalFormProps) => {
+  function capitalizeFirstLetter(string: string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   return (
     <Layout>
       <Barcode>
-          <legend>Barcode</legend>
           <img src={barcodeIcon} alt={"barcode icon"}/>
-          <input name='barcode' type='number' min='0' placeholder='98723490238' />
+          <Field 
+            name="barcode"
+            type="number"
+            label="Barcode"
+            component={TextField}
+            variant="outlined"/>
+          <ErrorMessage name="barcode" />
         </Barcode>
 
         <Location>
-          <legend>Location</legend>
+          <Typography variant="h6" gutterBottom>Location</Typography>
           <div>
             <div>
-              <label>Freezer</label>
               <img src={freezerIcon} alt={"freezer icon"}/> 
-              <input name='freezer' type='number' min='0' placeholder='20' />
+              <Field 
+                name="freezer"
+                type="number"
+                label="Freezer"
+                component={TextField}
+                variant="outlined"/>
+              <ErrorMessage name="freezer" />
             </div>
             <div>
-              <label>Shelf</label>
               <img src={shelfIcon} alt={"shelf icon"}/>
-              <input name='shelf' type='number' min='0' placeholder='4' />
+              <Field 
+                name="shelf"
+                type="number"
+                label="Shelf"
+                component={TextField}
+                variant="outlined"/>
+              <ErrorMessage name="shelf" />
             </div>
             <div>
-              <label>Box</label>
               <img src={boxIcon} alt={"box icon"}/>
-              <input name='box' type='number' min='0' placeholder='25' />
+              <Field 
+                name="box"
+                type="text"
+                label="Box"
+                component={TextField}
+                variant="outlined"/>
+              <ErrorMessage name="box" />
             </div>
             <div>
-              <label>Well Plate</label>
               <img src={wellPlateIcon} alt={"well plate icon"}/>
-              <input name='well plate' type='number' min='0' placeholder='8' />
+              <Field 
+                name="wellPlate"
+                type="text"
+                label="Well Plate"
+                component={TextField}
+                variant="outlined"/>
+              <ErrorMessage name="wellPlate" />
             </div>
           </div>
-          <p>F20.4.25.8</p>
+          <Typography variant="body1">F20.S4.B25.W8</Typography>
         </Location>
 
         <Amount>
-          <legend>Amount</legend>
+          <Typography variant="h6" gutterBottom>Amount</Typography>
           <Chemical />
+          <AmountInputs>
+            <div>
+              <Field 
+                name={`${props.amountfor}Amount`}
+                type="number"
+                label={`${capitalizeFirstLetter(props.amountfor)} Amount`}
+                component={TextField}
+                variant="outlined"/>
+              <ErrorMessage name={`${props.amountfor}Amount`} />
+              <Units unitsfor='inventory'/>
+            </div>
+            <div>
+              <Field 
+                name="type"
+                type="text"
+                label="Type"
+                component={TextField}
+                variant="outlined"/>
+              <ErrorMessage name="type" />
+            </div>
+          </AmountInputs>
           <div>
-            <label>Stockpile Goal</label>
-            <input name='goal amount' type='number' min='0' placeholder='1200' />
-            <Units />
-          </div>
-          <div>
-            <h4>Current Total</h4>
-            <p>200mg</p>
-          </div>
-          <div>
-            <label>Type</label>
-            <input name='type' type='text' placeholder='enzyme' />
+            <Typography variant="h6" gutterBottom>Current Total</Typography>
+            <Typography variant="body1">200mg</Typography>
           </div>
         </Amount>
     </Layout>

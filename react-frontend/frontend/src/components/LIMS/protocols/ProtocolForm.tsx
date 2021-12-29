@@ -1,75 +1,195 @@
 import React from 'react';
+// Styled Components
 import styled from 'styled-components';
+import { device } from '../../styled-components/responsive';
+import { LayoutSpacingMixin, LayoutLocationixin } from '../../styled-components/workspace-layout';
+// Formik and Yup
+import {
+  Formik,
+  Form,
+  Field,
+  ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+// Material UI
+import { TextField } from 'formik-mui';
+// My React Components
 import CUDButtons from '../buttons/CUDButtons';
 import ProtocolStepForm from './ProtocolStepForm';
 
-const Layout = styled.form `
-  overflow-y: scroll;
-  height: calc(100vh - 1rem);
-  display: grid;
-  padding: 1rem 2rem 0 4rem;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(4, min-content) repeat(2, 1fr);
-  row-gap: 1rem;
-  grid-template-areas: 
-    "Name Name Buttons ."
-    "Description Description Description Description"
-    "Protocols Protocols . ."
-    "Links Links Links Links";
+const OuterLayout = styled.section `
+  ${LayoutLocationixin}
+`
 
-  & input, textarea, fieldset {
-    padding: 1.2rem;
-    border-radius: 0.5rem;
-    border-color: rgb(222, 222, 223);
-    border-width: 1px;
-    border-style: solid;
-    background-color: white;
-  }
+const InnerLayout = styled.div `
+  ${LayoutSpacingMixin}
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    ". CUDButtons"
+    "Name Name"
+    "Description Description"
+    "Protocols Protocols"
+    "Links Links";
 
-  & legend {
-    padding: 1rem 1rem 0 1rem;
-    font-size: 1.57em;
+  @media ${device.laptop} {
+    grid-template-rows: repeat(4, min-content) repeat(2, 1fr);
+    grid-template-areas: 
+      "Name . . ."
+      "Description Description Description Description"
+      "Protocols Protocols Protocols ."
+      "Links Links Links Links";
   }
 `
 
-const Name = styled.fieldset `
+const Name = styled.div `
   grid-area: Name;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, min-content);
 `
 
-const Description = styled.fieldset `
+const Description = styled.div `
   grid-area: Description;
-
-  & > textarea {
-    height: 100%;
-    width: 100%;
-  }
 `
 
 const Protocols = styled.div `
   grid-area: Protocols;
 `
 
-const ProtocolForm = () => {
+interface IProtocolFormValues {
+  protocolName: string;
+  protocolDescription?: string;
+  equipment?: string;
+  protocolStepInstructions: string;
+  inputAmount?: number;
+  inputUnits?: string;
+  inputName?: string;
+  inputType?: string;
+  outputAmount?: number;
+  outputUnits?: string;
+  outputName?: string;
+  outputType?: string;
+}
+
+const ProtocolForm: React.FC<{}> = () => {
+  const initialValues:IProtocolFormValues = {
+    protocolName: '',
+    protocolDescription: '',
+    equipment: '',
+    protocolStepInstructions: '',
+    inputAmount: 0,
+    inputUnits: '',
+    inputName: '',
+    inputType: '',
+    outputAmount: 0,
+    outputUnits: '',
+    outputName: '',
+    outputType: '',
+  };
+
   return (
-    <Layout action="/buy" method="post">
-      <CUDButtons />
-      <Name>
-        <legend>Name</legend>
-        <input name='chemical' type='text' placeholder='DNA Synthesis' />
-      </Name>
+    <OuterLayout>
+      <Formik
+      initialValues={initialValues}
+      validationSchema={Yup.object({
+        protocolName: Yup.string()
+          .default('')
+          .nullable()
+          .max(50, 'Must be 50 characters or less')
+          .defined(),
+        protocolDescription: Yup.string()
+          .default('')
+          .nullable()
+          .max(1000, 'Must be 1000 characters or less')
+          .notRequired(),
+        equipment: Yup.string()
+          .default('')
+          .nullable()
+          .max(50, 'Must be 50 characters or less')
+          .notRequired(),
+        protocolStepInstructions: Yup.string()
+          .default('')
+          .nullable()
+          .max(1000, 'Must be 1000 characters or less')
+          .defined(),
+        inputAmount: Yup.number()
+          .default(0)
+          .nullable()
+          .min(0, 'Must be a positive number')
+          .notRequired(),
+        inputUnits: Yup.string()
+          .default('')
+          .nullable()
+          .notRequired(),
+        inputName: Yup.string()
+          .default('')
+          .nullable()
+          .max(50, 'Must be 50 characters or less')
+          .notRequired(),
+        inputType: Yup.string()
+          .default('')
+          .nullable()
+          .max(50, 'Must be 50 characters or less')
+          .notRequired(),
+        outputAmount: Yup.number()
+          .default(0)
+          .nullable()
+          .min(0, 'Must be a positive number')
+          .notRequired(),
+        outputUnits: Yup.string()
+          .default('')
+          .nullable()
+          .notRequired(),
+        outputName: Yup.string()
+          .default('')
+          .nullable()
+          .max(50, 'Must be 50 characters or less')
+          .notRequired(),
+        outputType: Yup.string()
+          .default('')
+          .nullable()
+          .max(50, 'Must be 50 characters or less')
+          .notRequired(),
+      })}
+      onSubmit={(values, { setSubmitting }) => {
+        setTimeout(() => {
+          alert(JSON.stringify(values, null, 2));
+          setSubmitting(false);
+        }, 400);
+      }}
+      >
+        <Form>
+          <InnerLayout>
+            <CUDButtons />
 
-      <Description>
-        <legend>Description</legend>
-        <textarea name='description' placeholder='DNA polymerase enzyme that transcribes single-stranded RNA into DNA. This enzyme is able to synthesize a double helix DNA once the RNA has been reverse transcribed in a first step into a single-strand DNA. RNA viruses, such as retroviruses, use the enzyme to reverse-transcribe their RNA genomes into DNA, which is then integrated into the host genome and replicated along with it. During the replication of some DNA viruses, such as the hepadnaviruses or pararetroviruses, also carrying a RT, the DNA genome is transcribed to RNA that serves as a template to make new viral DNA strands.'></textarea>
-      </Description>
+            <Name>
+              <Field 
+                name="protocolName"
+                type="text"
+                label="Protocol Name"
+                component={TextField}
+                variant="outlined"/>
+              <ErrorMessage name="protocolName" />
+            </Name>
 
-      <Protocols>
-        <ProtocolStepForm />
-      </Protocols>
-    </Layout>
+            <Description>
+              <Field
+                name="protocolDescription"
+                as="textarea"
+                className="form-textarea"
+                label="Protocol Description"
+                component={TextField}
+                variant="outlined"
+                multiline
+                fullWidth
+                rows={4}/>
+              <ErrorMessage name="protocolDescription" />
+            </Description>
+
+            <Protocols>
+              <ProtocolStepForm />
+            </Protocols>
+            </InnerLayout>
+        </Form>
+      </Formik>
+    </OuterLayout>
   )
 }
 

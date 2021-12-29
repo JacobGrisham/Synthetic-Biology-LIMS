@@ -1,30 +1,40 @@
 import React from 'react';
+// Styled Components
 import styled from 'styled-components';
+import {
+  Field,
+  ErrorMessage } from 'formik';
+// Material UI
+import { TextField } from 'formik-mui';
+import Divider from '@mui/material/Divider';
+// My React Components
 import IconButton from '../buttons/IconButton';
 import ProtocolChemicalForm from './ProtocolChemicalForm';
-import microscopeIcon from '../../assets/images/microscope-icon.svg';
-import bookIcon from '../../assets/images/book-icon.svg';
-import addIcon from '../../assets/images/add-icon.svg';
+// Assets
+import microscopeIcon from '../../../assets/images/microscope-icon.svg';
+import bookIcon from '../../../assets/images/book-icon.svg';
+import addIcon from '../../../assets/images/add-icon.svg';
 
 const Layout = styled.details `
+`
+
+const Box = styled.div `
+  padding: 1.2rem;
+  border-radius: 0.5rem;
+  border-color: rgb(222, 222, 223);
+  border-width: 1px;
+  border-style: solid;
+
   & > div {
-    padding: 1.2rem;
-    border-radius: 0.5rem;
-    border-color: rgb(222, 222, 223);
-    border-width: 1px;
-    border-style: solid;
+    margin: 1rem 0;
   }
 `
 
-const Details = styled.fieldset `
+const Details = styled.div `
   display: grid;
-  grid-template-rows: repeat(8, min-content);
+  grid-template-rows: repeat(auto-fit, minmax(30px, max-content));
   grid-template-columns: max-content minmax(30px, 1fr);
   column-gap: 2rem;
-
-  & > h2 {
-    grid-column: span 2;
-  }
 
   & > img {
     grid-column: 1 / 2;
@@ -36,30 +46,50 @@ const Details = styled.fieldset `
   }
 `
 
-const ProtocolStepForm = () => {
+const ProtocolStepForm: React.FC<{}> = () => {
   return (
     <Layout open>
       <summary>Step 1</summary>
 
-      <IconButton key={40} tooltip={'Add Protocol Step'} src={addIcon} alt={"add icon"} />
+      <IconButton tooltip={'Add Protocol Step'} src={addIcon} alt={"add icon"} />
 
-      <div>
+      <Box>
         <Details>
-          <legend>Equipment</legend>
-          <img src={microscopeIcon} alt={"equipment icon"}/> 
-          <input name='type' type='text' placeholder='PCR Chamber' />
+          <img src={microscopeIcon} alt={"equipment icon"}/>
+          <Field 
+              name="equipment"
+              type="text"
+              label="Equipment"
+              component={TextField}
+              variant="outlined"/>
+          <ErrorMessage name="equipment" />
         </Details>
 
-        <ProtocolChemicalForm title="Input" />
+        <Divider variant="middle" />
+
+        <ProtocolChemicalForm inputoutput="input" />
+
+        <Divider variant="middle" />
 
         <Details>
-          <legend>Instructions</legend>
           <img src={bookIcon} alt={"instructions icon"}/>
-          <textarea name='description' placeholder='DNA polymerase enzyme that transcribes single-stranded RNA into DNA. This enzyme is able to synthesize a double helix DNA once the RNA has been reverse transcribed in a first step into a single-strand DNA. RNA viruses, such as retroviruses, use the enzyme to reverse-transcribe their RNA genomes into DNA, which is then integrated into the host genome and replicated along with it. During the replication of some DNA viruses, such as the hepadnaviruses or pararetroviruses, also carrying a RT, the DNA genome is transcribed to RNA that serves as a template to make new viral DNA strands.'></textarea>
+          <Field
+            name="protocolStepInstructions"
+            as="textarea"
+            className="form-textarea"
+            label="Protocol Step Instructions"
+            component={TextField}
+            variant="outlined"
+            multiline
+            fullWidth
+            rows={4}/>
+          <ErrorMessage name="protocolStepInstructions" />
         </Details>
 
-        <ProtocolChemicalForm title="Output"/>
-      </div>
+        <Divider variant="middle" />
+
+        <ProtocolChemicalForm inputoutput="output"/>
+      </Box>
     </Layout>
   )
 }
