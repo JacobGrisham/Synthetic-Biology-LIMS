@@ -3,9 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { device } from '../../styled-components/responsive';
 // Formik
-import {
-  Field,
-  ErrorMessage } from 'formik';
+import { Field } from 'formik';
 // Material UI
 import { TextField } from 'formik-mui';
 import Typography from '@mui/material/Typography';
@@ -105,10 +103,12 @@ const AmountInputs = styled.div `
 `
 
 type IChemicalFormProps = {
-  amountfor: 'inventory' | 'product',
+  amountfor: 'inventory' | 'product';
+  errors: any;
+  touched: any;
 }
 
-const ChemicalForm = (props: IChemicalFormProps) => {
+const ChemicalForm = ({amountfor, errors, touched}: IChemicalFormProps) => {
   function capitalizeFirstLetter(string: string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
@@ -118,12 +118,12 @@ const ChemicalForm = (props: IChemicalFormProps) => {
       <Barcode>
           <img src={barcodeIcon} alt={"barcode icon"}/>
           <Field 
-            name="barcode"
             type="number"
-            label="Barcode"
+            variant="outlined"
             component={TextField}
-            variant="outlined"/>
-          <ErrorMessage name="barcode" />
+            label="Barcode"
+            name="barcode"
+            helperText={errors.barcode && touched.barcode ? errors.barcode : " "}/>
         </Barcode>
 
         <Location>
@@ -132,42 +132,42 @@ const ChemicalForm = (props: IChemicalFormProps) => {
             <div>
               <img src={freezerIcon} alt={"freezer icon"}/> 
               <Field 
-                name="freezer"
                 type="number"
-                label="Freezer"
+                variant="outlined"
                 component={TextField}
-                variant="outlined"/>
-              <ErrorMessage name="freezer" />
+                label="Freezer"
+                name="freezer"
+                helperText={errors.freezer && touched.freezer ? errors.freezer : " "}/>
             </div>
             <div>
               <img src={shelfIcon} alt={"shelf icon"}/>
               <Field 
-                name="shelf"
                 type="number"
-                label="Shelf"
+                variant="outlined"
                 component={TextField}
-                variant="outlined"/>
-              <ErrorMessage name="shelf" />
+                label="Shelf"
+                name="shelf"
+                helperText={errors.shelf && touched.shelf ? errors.shelf : " "}/>
             </div>
             <div>
               <img src={boxIcon} alt={"box icon"}/>
               <Field 
-                name="box"
                 type="text"
-                label="Box"
+                variant="outlined"
                 component={TextField}
-                variant="outlined"/>
-              <ErrorMessage name="box" />
+                label="Box"
+                name="box"
+                helperText={errors.box && touched.box ? errors.box : " "}/>
             </div>
             <div>
               <img src={wellPlateIcon} alt={"well plate icon"}/>
               <Field 
-                name="wellPlate"
                 type="text"
-                label="Well Plate"
+                variant="outlined"
                 component={TextField}
-                variant="outlined"/>
-              <ErrorMessage name="wellPlate" />
+                label="Well Plate"
+                name="wellPlate"
+                helperText={errors.wellPlate && touched.wellPlate ? errors.wellPlate : " "}/>
             </div>
           </div>
           <Typography variant="body1">F20.S4.B25.W8</Typography>
@@ -179,22 +179,21 @@ const ChemicalForm = (props: IChemicalFormProps) => {
           <AmountInputs>
             <div>
               <Field 
-                name={`${props.amountfor}Amount`}
                 type="number"
-                label={`${capitalizeFirstLetter(props.amountfor)} Amount`}
+                variant="outlined"
                 component={TextField}
-                variant="outlined"/>
-              <ErrorMessage name={`${props.amountfor}Amount`} />
+                label={`${capitalizeFirstLetter(amountfor)} Amount`}
+                name={`${amountfor}Amount`}/>
               <Units unitsfor='inventory'/>
             </div>
             <div>
               <Field 
-                name="type"
                 type="text"
-                label="Type"
+                variant="outlined"
                 component={TextField}
-                variant="outlined"/>
-              <ErrorMessage name="type" />
+                label="Type"
+                name="type"
+                helperText={errors.type && touched.type ? errors.type : " "}/>
             </div>
           </AmountInputs>
           <div>

@@ -18,7 +18,7 @@ const Links = () => {
       <Typography variant="h6" gutterBottom>Internal Links</Typography>
       <ul>
         <li>
-          <RouterLink to={'/Inventory'}>
+          <RouterLink to={`/lims/Inventory`}>
             DNA polymerase
           </RouterLink>
         </li>

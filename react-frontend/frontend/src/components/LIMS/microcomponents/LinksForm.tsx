@@ -44,7 +44,12 @@ const LinkList = styled.div `
   }
 `
 
-const Links: React.FC<{}> = () => {
+type ILinksFormProps = {
+  errors: any;
+  touched: any;
+}
+
+const Links = ({errors, touched}: ILinksFormProps) => {
   return (
     <Layout>
       <LinkList>
@@ -53,12 +58,14 @@ const Links: React.FC<{}> = () => {
         <ul>
           <li>
             <Field 
+              fullWidth
+              component={TextField}
+              variant="outlined"
               name="internalLink"
               type="text"
-              label="Relative URL"
-              component={TextField}
-              fullWidth
-              variant="outlined"/>
+              label="Relative URL (optional)"
+              helperText={errors.internalLink && touched.internalLink ? errors.internalLink : "Everything after https://localhost:3000"}
+              />
             <ErrorMessage name="internalLink" />
           </li>
         </ul>
@@ -70,12 +77,14 @@ const Links: React.FC<{}> = () => {
         <ul>
           <li>
             <Field 
-              name="externalLink"
-              type="text"
-              label="Absolute URL"
-              component={TextField}
               fullWidth
-              variant="outlined"/>
+              name="externalLink"
+              component={TextField}
+              variant="outlined"
+              type="text"
+              label="Absolute URL (optional)"
+              helperText={errors.externalLink && touched.externalLink ? errors.externalLink : "The entire URL including https://"}
+              />
             <ErrorMessage name="externalLink" />
           </li>
         </ul>

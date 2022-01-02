@@ -7,10 +7,11 @@ import { device } from '../../styled-components/responsive';
 import {
   Formik,
   Form,
-  Field,
-  ErrorMessage } from 'formik';
+  Field } from 'formik';
 import { TextField } from 'formik-mui';
-import * as Yup from 'yup';
+import { object } from 'yup';
+// Constants
+import { chemicalValidationSchema } from '../../../constants/validation-schemas';
 // My React Components
 import CUDButtons from '../buttons/CUDButtons';
 import ChemicalForm from './ChemicalForm'
@@ -53,7 +54,7 @@ const Description = styled.div `
 `
 
 interface IInventoryFormValues {
-  biochemlName: string;
+  biochemName: string;
   biochemDescription?: string;
   barcode: number;
   freezer: number;
@@ -69,7 +70,7 @@ interface IInventoryFormValues {
 
 const InventoryForm: React.FC<{}> = () => {
   const initialValues:IInventoryFormValues = {
-    biochemlName: '',
+    biochemName: '',
     biochemDescription: '',
     barcode: 0,
     freezer: 0,
@@ -87,107 +88,56 @@ const InventoryForm: React.FC<{}> = () => {
     <OuterLayout>
       <Formik
       initialValues={initialValues}
-      validationSchema={Yup.object({
-        biochemlName: Yup.string()
-          .default('')
-          .nullable()
-          .max(50, 'Must be 50 characters or less')
-          .defined(),
-        biochemDescription: Yup.string()
-          .default('')
-          .nullable()
-          .max(1000, 'Must be 1000 characters or less')
-          .notRequired(),
-        barcode: Yup.number()
-          .default(0)
-          .nullable()
-          .min(0, 'Must be a positive number')
-          .defined(),
-        freezer: Yup.number()
-          .default(0)
-          .nullable()
-          .min(0, 'Must be a positive number')
-          .defined(),
-        shelf: Yup.number()
-          .default(0)
-          .nullable()
-          .min(0, 'Must be a positive number')
-          .defined(),
-        box: Yup.number()
-          .default(0)
-          .nullable()
-          .min(0, 'Must be a positive number')
-          .defined(),
-        wellPlate: Yup.number()
-          .default(0)
-          .nullable()
-          .min(0, 'Must be a positive number')
-          .defined(),
-        inventoryAmount: Yup.number()
-          .default(0)
-          .nullable()
-          .min(0, 'Must be a positive number')
-          .defined(),
-        inventoryUnits: Yup.string()
-          .default('')
-          .nullable()
-          .defined(),
-        type: Yup.string()
-          .default('')
-          .nullable()
-          .max(50, 'Must be 50 characters or less')
-          .defined(),
-        internalLink: Yup.string().url()
-          .default('')
-          .nullable()
-          .max(100, 'Must be 100 characters or less')
-          .notRequired(),
-        externalLink: Yup.string().url()
-          .default('')
-          .nullable()
-          .max(200, 'Must be 200 characters or less')
-          .notRequired(),
-      })}
+      validationSchema={object(chemicalValidationSchema)}
       onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
+        setSubmitting(true);
+        fetch("post/", {
+          method: "POST",
+          body: JSON.stringify({
+            values: values
+          })
+        })
+        .catch(error => {
+          alert(`There was an error during the fetch operation: ${error}`);
+        });
       }}
       >
+        {({ errors, touched }) => (
         <Form>
           <InnerLayout>
             <CUDButtons />
 
             <Name>
                 <Field 
-                  name="biochemlName"
                   type="text"
-                  label="Chemical or Biological Name"
                   component={TextField}
-                  variant="outlined"/>
-                <ErrorMessage name="biochemlName" />
+                  variant="outlined"
+                  label="Chemical or Biological Name"
+                  name="biochemName"
+                  helperText={errors.biochemName && touched.biochemName ? errors.biochemName : " "}/>
               </Name>
 
-              <ChemicalForm amountfor='inventory'/>
+              <ChemicalForm amountfor='inventory' errors={errors} touched={touched}/>
 
               <Description>
                 <Field
-                  name="biochemDescription"
-                  as="textarea"
-                  className="form-textarea"
-                  label="Chemical or Biological Description"
-                  component={TextField}
-                  variant="outlined"
                   multiline
                   fullWidth
-                  rows={4}/>
-                <ErrorMessage name="biochemDescription" />
+                  rows={4}
+                  as="textarea"
+                  className="form-textarea"
+                  variant="outlined"
+                  component={TextField}
+                  label="Chemical or Biological Description (optional)"
+                  name="biochemDescription"
+                  helperText={errors.biochemDescription && touched.biochemDescription ? errors.biochemDescription : " "}/>
               </Description>
 
-            <LinksForm />
+            <LinksForm errors={errors} touched={touched}/>
+
           </InnerLayout>
         </Form>
+        )}
       </Formik>
     </OuterLayout>
   )

@@ -7,11 +7,12 @@ import { LayoutSpacingMixin, LayoutLocationixin } from '../../styled-components/
 import {
   Formik,
   Form,
-  Field,
-  ErrorMessage } from 'formik';
-import * as Yup from 'yup';
+  Field } from 'formik';
+import { object } from 'yup';
 // Material UI
 import { TextField } from 'formik-mui';
+// Constants
+import { protocolValidationSchema } from '../../../constants/validation-schemas';
 // My React Components
 import CUDButtons from '../buttons/CUDButtons';
 import ProtocolStepForm from './ProtocolStepForm';
@@ -88,106 +89,56 @@ const ProtocolForm: React.FC<{}> = () => {
     <OuterLayout>
       <Formik
       initialValues={initialValues}
-      validationSchema={Yup.object({
-        protocolName: Yup.string()
-          .default('')
-          .nullable()
-          .max(50, 'Must be 50 characters or less')
-          .defined(),
-        protocolDescription: Yup.string()
-          .default('')
-          .nullable()
-          .max(1000, 'Must be 1000 characters or less')
-          .notRequired(),
-        equipment: Yup.string()
-          .default('')
-          .nullable()
-          .max(50, 'Must be 50 characters or less')
-          .notRequired(),
-        protocolStepInstructions: Yup.string()
-          .default('')
-          .nullable()
-          .max(1000, 'Must be 1000 characters or less')
-          .defined(),
-        inputAmount: Yup.number()
-          .default(0)
-          .nullable()
-          .min(0, 'Must be a positive number')
-          .notRequired(),
-        inputUnits: Yup.string()
-          .default('')
-          .nullable()
-          .notRequired(),
-        inputName: Yup.string()
-          .default('')
-          .nullable()
-          .max(50, 'Must be 50 characters or less')
-          .notRequired(),
-        inputType: Yup.string()
-          .default('')
-          .nullable()
-          .max(50, 'Must be 50 characters or less')
-          .notRequired(),
-        outputAmount: Yup.number()
-          .default(0)
-          .nullable()
-          .min(0, 'Must be a positive number')
-          .notRequired(),
-        outputUnits: Yup.string()
-          .default('')
-          .nullable()
-          .notRequired(),
-        outputName: Yup.string()
-          .default('')
-          .nullable()
-          .max(50, 'Must be 50 characters or less')
-          .notRequired(),
-        outputType: Yup.string()
-          .default('')
-          .nullable()
-          .max(50, 'Must be 50 characters or less')
-          .notRequired(),
-      })}
+      validationSchema={object(protocolValidationSchema)}
       onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
+        setSubmitting(true);
+        fetch("post/", {
+          method: "POST",
+          body: JSON.stringify({
+            values: values
+          })
+        })
+        .catch(error => {
+          alert(`There was an error during the fetch operation: ${error}`);
+        });
       }}
       >
+        {({ errors, touched }) => (
         <Form>
           <InnerLayout>
             <CUDButtons />
 
             <Name>
               <Field 
-                name="protocolName"
                 type="text"
-                label="Protocol Name"
                 component={TextField}
-                variant="outlined"/>
-              <ErrorMessage name="protocolName" />
+                variant="outlined"
+                label="Protocol Name"
+                name="protocolName"
+                helperText={errors.protocolName && touched.protocolName ? errors.protocolName : " "}/>
             </Name>
 
             <Description>
               <Field
-                name="protocolDescription"
-                as="textarea"
-                className="form-textarea"
-                label="Protocol Description"
-                component={TextField}
-                variant="outlined"
                 multiline
                 fullWidth
-                rows={4}/>
-              <ErrorMessage name="protocolDescription" />
+                rows={4}
+                as="textarea"
+                className="form-textarea"
+                variant="outlined"
+                component={TextField}
+                label="Protocol Description (optional)"
+                name="protocolDescription"
+                helperText={errors.protocolDescription && touched.protocolDescription ? errors.protocolDescription : " "}/>
             </Description>
 
             <Protocols>
-              <ProtocolStepForm />
+              <ProtocolStepForm errors={errors} touched={touched} />
             </Protocols>
-            </InnerLayout>
+
+          </InnerLayout>
         </Form>
+        )}
       </Formik>
     </OuterLayout>
   )

@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {
-  Field,
-  ErrorMessage } from 'formik';
+import { Field } from 'formik';
   import { TextField } from 'formik-mui';
 import Units from '../inventory/Units';
 import {ReactComponent as Chemical} from '../../../assets/images/inventory-icon.svg';
@@ -59,7 +57,6 @@ const ProtocolChemicalInputField = (props: IProtocolChemicalInputFieldProps) => 
             label={`${capitalizeFirstLetter(props.inputoutput)} Amount`}
             component={TextField}
             variant="outlined"/>
-          <ErrorMessage name={`${props.inputoutput}Amount`} />
         </div>
         <div>
           <Units unitsfor={`${props.inputoutput}Amount`}/>
@@ -71,7 +68,6 @@ const ProtocolChemicalInputField = (props: IProtocolChemicalInputFieldProps) => 
             label={`${capitalizeFirstLetter(props.inputoutput)} Name`}
             component={TextField}
             variant="outlined"/>
-          <ErrorMessage name={`${props.inputoutput}`} />
         </div>
         <div>
           <Field 
@@ -80,7 +76,6 @@ const ProtocolChemicalInputField = (props: IProtocolChemicalInputFieldProps) => 
             label={`${capitalizeFirstLetter(props.inputoutput)} Type`}
             component={TextField}
             variant="outlined"/>
-          <ErrorMessage name={`${props.inputoutput}Type`} />
         </div>
       </Flex>
     </Amount>

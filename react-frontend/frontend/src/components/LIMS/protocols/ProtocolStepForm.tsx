@@ -1,9 +1,7 @@
 import React from 'react';
 // Styled Components
 import styled from 'styled-components';
-import {
-  Field,
-  ErrorMessage } from 'formik';
+import { Field } from 'formik';
 // Material UI
 import { TextField } from 'formik-mui';
 import Divider from '@mui/material/Divider';
@@ -46,7 +44,12 @@ const Details = styled.div `
   }
 `
 
-const ProtocolStepForm: React.FC<{}> = () => {
+type IProtocolStepProps = {
+  errors: any;
+  touched: any;
+}
+
+const ProtocolStepForm = ({errors, touched}: IProtocolStepProps) => {
   return (
     <Layout open>
       <summary>Step 1</summary>
@@ -57,12 +60,12 @@ const ProtocolStepForm: React.FC<{}> = () => {
         <Details>
           <img src={microscopeIcon} alt={"equipment icon"}/>
           <Field 
-              name="equipment"
               type="text"
-              label="Equipment"
               component={TextField}
-              variant="outlined"/>
-          <ErrorMessage name="equipment" />
+              variant="outlined"
+              label="Equipment (optional)"
+              name="equipment"
+              helperText={errors.equipment && touched.equipment ? errors.equipment : " "}/>
         </Details>
 
         <Divider variant="middle" />
@@ -74,16 +77,16 @@ const ProtocolStepForm: React.FC<{}> = () => {
         <Details>
           <img src={bookIcon} alt={"instructions icon"}/>
           <Field
-            name="protocolStepInstructions"
-            as="textarea"
-            className="form-textarea"
-            label="Protocol Step Instructions"
-            component={TextField}
-            variant="outlined"
             multiline
             fullWidth
-            rows={4}/>
-          <ErrorMessage name="protocolStepInstructions" />
+            rows={4}
+            variant="outlined"
+            as="textarea"
+            className="form-textarea"
+            component={TextField}
+            label="Protocol Step Instructions"
+            name="protocolStepInstructions"
+            helperText={errors.protocolStepInstructions && touched.protocolStepInstructions ? errors.protocolStepInstructions : " "}/>
         </Details>
 
         <Divider variant="middle" />

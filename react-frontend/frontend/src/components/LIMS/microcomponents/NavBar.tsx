@@ -80,7 +80,7 @@ const NavBar: React.FC<INavProps> = (props) => {
       <List>
         {routes.map(({icon, name}, index) => (
           <ListItem key={`${name} list item`}>
-            <Link to={`/${name}`}>
+            <Link to={`${name}`}>
                 <MUIListItem
                   key={`${name} button`}
                   selected={selectedIndex === index}

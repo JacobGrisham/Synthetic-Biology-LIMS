@@ -1,12 +1,14 @@
 import React from 'react';
 // Formik and Yup
 import { Formik, Form } from 'formik';
-import * as Yup from 'yup';
+import { object } from 'yup';
 // Styled Components
 import styled from 'styled-components';
 import { LayoutSpacingMixin, LayoutLocationixin } from '../../styled-components/workspace-layout';
 // Material UI
 import Typography from '@mui/material/Typography';
+// Constants
+import { chemicalValidationSchema } from '../../../constants/validation-schemas';
 // My React Components
 import ButtonPropped from '../../ButtonPropped';
 import ChemicalForm from '../inventory/ChemicalForm'
@@ -64,64 +66,21 @@ const JobForm: React.FC<{}> = () => {
     <OuterLayout>
       <Formik
       initialValues={initialValues}
-      validationSchema={Yup.object({
-        biochemlName: Yup.string()
-          .default('')
-          .nullable()
-          .max(50, 'Must be 50 characters or less')
-          .defined(),
-        biochemDescription: Yup.string()
-          .default('')
-          .nullable()
-          .max(1000, 'Must be 1000 characters or less')
-          .notRequired(),
-        barcode: Yup.number()
-          .default(0)
-          .nullable()
-          .min(0, 'Must be a positive number')
-          .defined(),
-        freezer: Yup.number()
-          .default(0)
-          .nullable()
-          .min(0, 'Must be a positive number')
-          .defined(),
-        shelf: Yup.number()
-          .default(0)
-          .nullable()
-          .min(0, 'Must be a positive number')
-          .defined(),
-        box: Yup.number()
-          .default(0)
-          .nullable()
-          .min(0, 'Must be a positive number')
-          .defined(),
-        wellPlate: Yup.number()
-          .default(0)
-          .nullable()
-          .min(0, 'Must be a positive number')
-          .defined(),
-        inventoryAmount: Yup.number()
-          .default(0)
-          .nullable()
-          .min(0, 'Must be a positive number')
-          .defined(),
-        inventoryUnits: Yup.string()
-          .default('')
-          .nullable()
-          .defined(),
-        type: Yup.string()
-          .default('')
-          .nullable()
-          .max(50, 'Must be 50 characters or less')
-          .defined(),
-      })}
+      validationSchema={object(chemicalValidationSchema)}
       onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
+        setSubmitting(true);
+        fetch("post/", {
+          method: "POST",
+          body: JSON.stringify({
+            values: values
+          })
+        })
+        .catch(error => {
+          alert(`There was an error during the fetch operation: ${error}`);
+        });
       }}
       >
+      {({ errors, touched }) => (
       <Form>
         <InnerLayout>
           <Buttons>
@@ -133,9 +92,10 @@ const JobForm: React.FC<{}> = () => {
             <Typography variant="h6">Reagant</Typography>
             <Typography variant="h6">7</Typography>
           </Info>
-          <ChemicalForm amountfor='product' />
+          <ChemicalForm amountfor='product' errors={errors} touched={touched}/>
         </InnerLayout>
       </Form>
+      )}
     </Formik>
   </OuterLayout>
   )

@@ -6,11 +6,12 @@ import { LayoutSpacingMixin, LayoutLocationixin } from '../../styled-components/
 import {
   Formik,
   Form,
-  Field,
-  ErrorMessage } from 'formik';
-import * as Yup from 'yup';
+  Field } from 'formik';
+  import { object } from 'yup';
 // Material UI
 import { TextField } from 'formik-mui';
+// Constants
+import { projectValidationSchema } from '../../../constants/validation-schemas';
 // My React Components
 import CUDButtons from '../buttons/CUDButtons';
 import LinksForm from '../microcomponents/LinksForm';
@@ -59,71 +60,54 @@ const ProjectForm: React.FC<{}> = () => {
     <OuterLayout>
       <Formik
       initialValues={initialValues}
-      validationSchema={Yup.object({
-        projectName: Yup.string()
-          .default('')
-          .nullable()
-          .max(50, 'Must be 50 characters or less')
-          .defined(),
-        projectDescription: Yup.string()
-          .default('')
-          .nullable()
-          .max(1000, 'Must be 1000 characters or less')
-          .notRequired(),
-        protocols: Yup.string()
-          .default('')
-          .nullable()
-          .max(50, 'Must be 50 characters or less')
-          .defined(),
-        internalLink: Yup.string().url()
-          .default('')
-          .nullable()
-          .max(100, 'Must be 100 characters or less')
-          .notRequired(),
-        externalLink: Yup.string().url()
-          .default('')
-          .nullable()
-          .max(200, 'Must be 200 characters or less')
-          .notRequired(),
-      })}
+      validationSchema={object(projectValidationSchema)}
       onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
+        setSubmitting(true);
+        fetch("post/", {
+          method: "POST",
+          body: JSON.stringify({
+            values: values
+          })
+        })
+        .catch(error => {
+          alert(`There was an error during the fetch operation: ${error}`);
+        });
       }}
       >
+        {({ errors, touched }) => (
         <Form>
           <InnerLayout>
             <CUDButtons />
 
             <Name>
               <Field 
-                name="projectName"
                 type="text"
-                label="Project Name"
+                variant="outlined"
                 component={TextField}
-                variant="outlined"/>
-              <ErrorMessage name="projectName" />
+                label="Project Name"
+                name="projectName"
+                helperText={errors.projectName && touched.projectName ? errors.projectName : " "}/>
             </Name>
 
             <Description>
               <Field
-                name="projectDescription"
-                as="textarea"
-                className="form-textarea"
-                label="Project Description"
-                component={TextField}
-                variant="outlined"
                 multiline
                 fullWidth
-                rows={4}/>
-              <ErrorMessage name="projectDescription" />
+                rows={4}
+                as="textarea"
+                variant="outlined"
+                component={TextField}
+                className="form-textarea"
+                label="Project Description (optional)"
+                name="projectDescription"
+                helperText={errors.projectDescription && touched.projectDescription ? errors.projectDescription : " "}/>
             </Description>
 
-            <LinksForm />
+            <LinksForm errors={errors} touched={touched}/>
+
           </InnerLayout>
         </Form>
+        )}
       </Formik>
     </OuterLayout>
   )
