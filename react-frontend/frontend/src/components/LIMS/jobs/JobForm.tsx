@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 // Constants
 import { chemicalValidationSchema } from '../../../constants/validation-schemas';
 // My React Components
-import ButtonPropped from '../../ButtonPropped';
+import ButtonPropped from '../../base/ButtonPropped';
 import ChemicalForm from '../inventory/ChemicalForm'
 
 const OuterLayout = styled.section `

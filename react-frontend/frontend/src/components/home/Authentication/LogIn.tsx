@@ -22,12 +22,12 @@ import FormHelperText from '@mui/material/FormHelperText';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 // My React Components
-import Copyright from './Copyright';
+import Copyright from '../Copyright';
 import useForm from "./useForm";
 // Assets
-import {ReactComponent as Logo} from '../../assets/images/logo.svg';
-import {ReactComponent as Visibility} from '../../assets/images/eye.svg';
-import {ReactComponent as VisibilityOff} from '../../assets/images/eyestrikethrough.svg';
+import {ReactComponent as Logo} from '../../../assets/images/logo.svg';
+import {ReactComponent as Visibility} from '../../../assets/images/eye-icon.svg';
+import {ReactComponent as VisibilityOff} from '../../../assets/images/eyestrikethrough-icon.svg';
 
 
 const theme = createTheme();

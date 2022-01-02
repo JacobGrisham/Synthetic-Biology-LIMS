@@ -23,13 +23,13 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import useMediaQuery from '@mui/material/useMediaQuery';
 // My React Components
-import Copyright from './Copyright';
+import Copyright from '../Copyright';
 import { validator } from "./RegisterValidation";
 import useForm from "./useForm";
 // Assets
-import {ReactComponent as Logo} from '../../assets/images/logo.svg';
-import {ReactComponent as Visibility} from '../../assets/images/eye.svg';
-import {ReactComponent as VisibilityOff} from '../../assets/images/eyestrikethrough.svg';
+import {ReactComponent as Logo} from '../../../assets/images/logo.svg';
+import {ReactComponent as Visibility} from '../../../assets/images/eye-icon.svg';
+import {ReactComponent as VisibilityOff} from '../../../assets/images/eyestrikethrough-icon.svg';
 
 const theme = createTheme();
 

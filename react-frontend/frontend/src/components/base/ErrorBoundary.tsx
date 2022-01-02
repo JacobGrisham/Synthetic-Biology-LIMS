@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ServerError from './placeholders/Error';
+import ServerErrorImage from '../../assets/images/500.svg';
 
 // Typescript was throwing errors when I separated the props and the state
 interface IPropsState {
@@ -21,6 +23,6 @@ export default class ErrorBoundary extends Component<{},any> {
   }
 
   render() {
-    return this.state.hasError ? <h1>Oooops. Something went wrong with React</h1> : this.props.children
+    return this.state.hasError ? <ServerError image={ServerErrorImage}/> : this.props.children
   }
 }

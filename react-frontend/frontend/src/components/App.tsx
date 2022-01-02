@@ -1,19 +1,21 @@
-// The main job of this React component is to connect React to Redux and to add routes for the landing, login/register, and LIMS
+// The main job of this React component is
+// 1. To connect React to Redux
+// 2. To define the react-router routes
 
 // React
 import React from 'react';
 // React Router
-import { Routes, Route, Outlet } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 // My React Components
-import ErrorBoundary from './ErrorBoundary';
+import ErrorBoundary from './base/ErrorBoundary';
 import LIMS from './LIMS/LIMS';
 import Home from './home/Home';
-import Register from './home/Register';
-import LogIn from './home/LogIn';
-import NotFound from './LIMS/placeholders/Error';
+import Register from './home/Authentication/Register';
+import LogIn from './home/Authentication/LogIn';
+import NotFound from './base/placeholders/Error';
 import NotFoundImage from '../assets/images/404.svg';
 // Constants
-import { routes, nestedRoutes } from '../constants/constants';
+import { routes, nestedRoutes } from '../constants/routes-and-navbar-icons';
 // Redux
 // import { AnyAction } from 'redux';
 // import { ThunkDispatch } from 'redux-thunk';
@@ -55,7 +57,9 @@ const App = () => {
   return (
     <ErrorBoundary>
       <Routes>
-        <Route path="/" element={<Home />}/>
+        <Route path="/" element={<Home />} />
+        <Route path="register" element={<Register />} />
+        <Route path="login" element={<LogIn />} />
         <Route path="lims" element={<LIMS />}>
           {routes.map((route, index) => (
             <Route
@@ -73,8 +77,7 @@ const App = () => {
             ))}
             <Route path="*" element={<NotFound image={NotFoundImage}/>} />
         </Route>
-        <Route path="register" element={<Register />} />
-        <Route path="login" element={<LogIn />} />
+        <Route path="*" element={<NotFound image={NotFoundImage}/>} />
       </Routes>
     </ErrorBoundary>
   );

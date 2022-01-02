@@ -12,7 +12,7 @@ import Link, { LinkProps } from '@mui/material/Link';
 import SearchField from '../search/SearchField';
 import SearchResults from '../search/SearchResults';
 import ResultList from '../search/ResultList';
-import ErrorBoundary from '../../ErrorBoundary';
+import ErrorBoundary from '../../base/ErrorBoundary';
 import Dispense from '../inventory/Dispense';
 import IconButton from '../buttons/IconButton';
 import IconLink from '../buttons/IconLink';

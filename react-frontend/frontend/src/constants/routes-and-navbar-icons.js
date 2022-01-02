@@ -7,7 +7,7 @@ import Inventory from '../components/LIMS/inventory/Inventory';
 import ProjectForm from '../components/LIMS/projects/ProjectForm';
 import ProtocolForm from '../components/LIMS/protocols/ProtocolForm';
 import InventoryForm from '../components/LIMS/inventory/InventoryForm';
-import ComingSoon from '../components/LIMS/placeholders/ComingSoon';
+import ComingSoon from '../components/base/placeholders/ComingSoon';
 // Icons
 import Home from '../assets/images/logo-icon.svg';
 import Search from '../assets/images/lg-search-icon.svg';

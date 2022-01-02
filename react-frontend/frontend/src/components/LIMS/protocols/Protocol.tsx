@@ -9,7 +9,7 @@ import { device } from '../../styled-components/responsive';
 import Typography from '@mui/material/Typography';
 // My React Components
 import ProtocolStep from './ProtocolStep';
-import ButtonPropped from '../../ButtonPropped';
+import ButtonPropped from '../../base/ButtonPropped';
 import Metadata from '../microcomponents/Metadata';
 import HistoryList from '../microcomponents/HistoryList';
 import Links from '../microcomponents/Links';

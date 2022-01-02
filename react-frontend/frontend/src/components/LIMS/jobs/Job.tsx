@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import styled from 'styled-components';
 import { CombinedStyledLayout } from '../../styled-components/workspace-layout';
 // My React Components
-import ButtonPropped from '../../ButtonPropped';
+import ButtonPropped from '../../base/ButtonPropped';
 import ProtocolStep from '../protocols/ProtocolStep'
 
 const Layout = styled(CombinedStyledLayout) `

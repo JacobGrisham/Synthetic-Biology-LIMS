@@ -9,7 +9,7 @@ import { styled  as materialuistyled } from '@mui/material/styles';
 import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
 import Zoom from '@mui/material/Zoom';
 // Constants
-import { routes } from '../../../constants/constants';
+import { routes } from '../../../constants/routes-and-navbar-icons';
 
 
 const List = styled.ul `

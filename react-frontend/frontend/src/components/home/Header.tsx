@@ -4,7 +4,7 @@ import styled from 'styled-components';
 // React Router
 import { Link } from "react-router-dom";
 // My React Components
-import ButtonPropped from '../ButtonPropped';
+import ButtonPropped from '../base/ButtonPropped';
 import {ReactComponent as HeroImage} from '../../assets/images/hero.svg';
 
 const Hero = styled.header`

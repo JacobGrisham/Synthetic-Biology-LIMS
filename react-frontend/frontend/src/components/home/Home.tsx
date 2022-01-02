@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Outlet } from "react-router-dom";
 import styled from 'styled-components';
 import GlobalStyle from '../styled-components/theme';
 import NavBar from './NavBar';
@@ -39,7 +38,6 @@ const Home: React.FC<{}> = () => {
         companies={companies}
       /> */}
       <Footer />
-      <Outlet />
     </Layout>
   );
 }

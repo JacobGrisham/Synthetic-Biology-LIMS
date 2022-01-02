@@ -8,7 +8,7 @@ import { device } from '../../styled-components/responsive';
 // Material UI
 import Typography from '@mui/material/Typography';
 // My React Components
-import ButtonPropped from '../../ButtonPropped';
+import ButtonPropped from '../../base/ButtonPropped';
 import JobListItem from '../jobs/JobListItem';
 import Table from '../jobs/Table';
 import Metadata from '../microcomponents/Metadata';

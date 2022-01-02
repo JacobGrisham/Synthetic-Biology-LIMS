@@ -4,7 +4,7 @@ import styled from 'styled-components';
 // React Router
 import { Link } from "react-router-dom";
 // My React Components
-import ButtonPropped from '../ButtonPropped';
+import ButtonPropped from '../base/ButtonPropped';
 // Assets
 import {ReactComponent as Logo} from '../../assets/images/logo.svg';
 

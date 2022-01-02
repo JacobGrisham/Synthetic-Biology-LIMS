@@ -8,7 +8,7 @@ import { Link, useLocation } from "react-router-dom";
 // Material UI
 import Typography from '@mui/material/Typography';
 // My React Components
-import ButtonPropped from '../../ButtonPropped';
+import ButtonPropped from '../../base/ButtonPropped';
 import Metadata from '../microcomponents/Metadata';
 import Links from '../microcomponents/Links';
 import HistoryList from '../microcomponents/HistoryList';
