@@ -100,7 +100,7 @@ const LinkRouter = (props: LinkRouterProps) => (
 
 const Drawer: React.FC<IDrawerProps> = (props) => {
   const location = useLocation();
-  const pathnames = location.pathname.split('/').filter((x) => x);
+  const pathnames = location.pathname.split('/').filter((x, index) => index > 1 && x);
   return (
     <Layout open={props.drawerToggle ? false : true}>
       <Header>
@@ -108,7 +108,7 @@ const Drawer: React.FC<IDrawerProps> = (props) => {
           <Breadcrumbs separator="›" aria-label="breadcrumb">
             {pathnames.map((value, index) => {
               const last = index === pathnames.length - 1;
-              const to = `/${pathnames.slice(0, index + 1).join('/')}`;
+              const to = `/lims/${pathnames.slice(0, index + 1).join('/')}`;
 
               return last ? (
                 <Typography variant="h5" color="text.primary" key={to}>
