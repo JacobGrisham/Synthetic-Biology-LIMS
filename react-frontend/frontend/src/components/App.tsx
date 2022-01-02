@@ -3,14 +3,17 @@
 // React
 import React from 'react';
 // React Router
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
 // My React Components
 import ErrorBoundary from './ErrorBoundary';
 import LIMS from './LIMS/LIMS';
 import Home from './home/Home';
 import Register from './home/Register';
 import LogIn from './home/LogIn';
-import FouOFour from './LIMS/microcomponents/404';
+import NotFound from './LIMS/placeholders/Error';
+import NotFoundImage from '../assets/images/404.svg';
+// Constants
+import { routes, nestedRoutes } from '../constants/constants';
 // Redux
 // import { AnyAction } from 'redux';
 // import { ThunkDispatch } from 'redux-thunk';
@@ -52,10 +55,26 @@ const App = () => {
   return (
     <ErrorBoundary>
       <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
-        <Route path="/*" element={<LIMS />} />
-        <Route path="/Register" element={<Register />} />
-        <Route path="/Login" element={<LogIn />} />
+        <Route path="/" element={<Home />}/>
+        <Route path="lims" element={<LIMS />}>
+          {routes.map((route, index) => (
+            <Route
+              key={index}
+              path={route.path}
+              element={<route.component />}
+              />
+            ))}
+          {nestedRoutes.map((route, index) => (
+            <Route
+              key={index}
+              path={route.path}
+              element={<route.component />}
+              />
+            ))}
+            <Route path="*" element={<NotFound image={NotFoundImage}/>} />
+        </Route>
+        <Route path="register" element={<Register />} />
+        <Route path="login" element={<LogIn />} />
       </Routes>
     </ErrorBoundary>
   );

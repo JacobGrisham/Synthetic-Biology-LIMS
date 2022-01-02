@@ -7,7 +7,7 @@ import Inventory from '../components/LIMS/inventory/Inventory';
 import ProjectForm from '../components/LIMS/projects/ProjectForm';
 import ProtocolForm from '../components/LIMS/protocols/ProtocolForm';
 import InventoryForm from '../components/LIMS/inventory/InventoryForm';
-import ComingSoon from '../components/LIMS/microcomponents/ComingSoon';
+import ComingSoon from '../components/LIMS/placeholders/ComingSoon';
 // Icons
 import Home from '../assets/images/logo-icon.svg';
 import Search from '../assets/images/lg-search-icon.svg';
@@ -22,6 +22,15 @@ import Analytics from '../assets/images/graph-icon.svg';
 import Credentials from '../assets/images/book-icon.svg';
 import Profile from '../assets/images/user-icon.svg';
 import Settings from '../assets/images/gear-icon.svg';
+// Images for Placeholders
+import NotFound from '../assets/images/404.svg';
+import Forbidden from '../assets/images/403.svg';
+import EquipmentImage from '../assets/images/equipment.svg';
+import AutomationImage from '../assets/images/automation.svg';
+import AnalyticsImage from '../assets/images/analytics.svg';
+import ShippingImage from '../assets/images/shipping.svg';
+import HomeImage from '../assets/images/home.svg';
+import ProductsImage from '../assets/images/products.svg';
 
 export const API_URL = "http://localhost:8000/api/v1/company"
 
@@ -33,7 +42,7 @@ export const routes = [
   { path: 'home/',
     name: 'Home',
     icon: Home,
-    component: () => <ComingSoon />
+    component: () => <ComingSoon image={HomeImage}/>
   },
   { path: 'search/*',
     name: 'Search',
@@ -45,7 +54,7 @@ export const routes = [
     icon: Projects,
     component: () => <Project />
   },
-  { path: '/protocols',
+  { path: 'protocols/',
     name: 'Protocols',
     icon: Protocols,
     component: () => <Protocol />
@@ -59,27 +68,27 @@ export const routes = [
   { path: 'equipment/*',
     name: 'Equipment',
     icon: Equipment,
-    component: () => <ComingSoon />
+    component: () => <ComingSoon image={EquipmentImage} />
   },
   { path: 'automation/*',
     name: 'Automation',
     icon: Automation,
-    component: () => <ComingSoon />
+    component: () => <ComingSoon image={AutomationImage}/>
   },
   { path: 'products/*',
     name: 'Products',
     icon: Products,
-    component: () => <ComingSoon />
+    component: () => <ComingSoon image={ProductsImage}/>
   },
   { path: 'shipping/*',
     name: 'Shipping',
     icon: Shipping,
-    component: () => <ComingSoon />
+    component: () => <ComingSoon image={ShippingImage}/>
   },
   { path: 'analytics/*',
     name: 'Analytics',
     icon: Analytics,
-    component: () => <ComingSoon />
+    component: () => <ComingSoon image={AnalyticsImage}/>
   },
   { path: 'credentials/*',
     name: 'Credentials',

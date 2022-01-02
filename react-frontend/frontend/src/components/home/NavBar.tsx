@@ -20,6 +20,8 @@ const StyledNavBar = styled.nav `
 
 const LogoButton = styled.div `
   grid-column: 1 / 2;
+  width: 195px;
+  height: 86px;
 `
 
 const Buttons = styled.div `
