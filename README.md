@@ -39,16 +39,17 @@
 -   Compressing files with Webpack and zipping files with brotli
 
 ## 🛠 Technologies
-|Protoyping|Graphic Design|Front-End         |Back-End|Database  |Deployment   |Testing  |
------------|------------- | -----------------| ------ | -------- | ----------- | ------- |
-|Adobe XD  |Adobe XD	    |React	           |Python3 |PostgreSQL|Git          |Jest     |
-|.         |Freepik			  |Redux		         |Django  |Redis     |circleci     |React Testing Library   |
-|.         |.      			  |Typescript        |Celery  |.         |Docker       |Cypress  |
-|.         |.			        |ES6               |.		    |.		     |Kubernetes	 |PyTest   |
-|.         |.             |Styled Components |.       |.         |AWS EC2      |.        |
-|.         |.             |.                 |.       |.         |AWS DynamoDB |.        |
-|.         |.             |.                 |.       |.         |AWS Cloudfront|.       |
-
+|Protoyping|Graphic Design|Front-End         |Back-End                |Database  |Deployment        |Testing                 |
+-----------|------------- | -----------------| ---------------------- | -------- | ---------------- | ---------------------- |
+|Adobe XD  |Adobe XD	    |React	           |Python3                 |PostgreSQL|Git               |Jest                    |
+|.         |Freepik			  |Redux		         |Django                  |Redis     |circleci          |React Testing Library   |
+|.         |.      			  |Typescript        |Django Rest Framework   |.         |Docker            |Cypress                 |
+|.         |.			        |ES6               |*Celery*	              |.		     |*Kubernetes*	    |PyTest                  |
+|.         |.             |React Router      |.                       |.         |*AWS Lambda*      |.                       |
+|.         |.             |Formik            |.                       |.         |*AWS Aurora*      |.                       |
+|.         |.             |Styled Components |.                       |.         |*AWS API Gateway* |.                       |
+|.         |.             |Material UI       |.                       |.         |.                 |.                       |
+note that *italicized* text indicates that the technology has not been applied yet
 
 ## ⚖️ Methodology
 -   Single Page Application for a better user experience.
