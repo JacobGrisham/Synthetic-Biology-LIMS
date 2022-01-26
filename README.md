@@ -49,7 +49,8 @@
 |.         |.             |Formik            |.                       |.         |*AWS Aurora*      |.                       |
 |.         |.             |Styled Components |.                       |.         |*AWS API Gateway* |.                       |
 |.         |.             |Material UI       |.                       |.         |.                 |.                       |
-note that *italicized* text indicates that the technology has not been applied yet
+
+-   note that *italicized* text indicates that the technology has not been applied yet
 
 ## ⚖️ Methodology
 -   Single Page Application for a better user experience.
