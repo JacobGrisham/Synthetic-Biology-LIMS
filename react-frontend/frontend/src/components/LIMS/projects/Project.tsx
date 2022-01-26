@@ -93,7 +93,7 @@ const JobStatus = () => {
         <Typography id="status-title" variant="h6" gutterBottom>Status</Typography>
         <Typography id="name" variant="h6" gutterBottom>BioFuel</Typography>
         <Typography id="status" variant="body1">In Progress</Typography>
-        <Link to={`${location.pathname}/Edit`}>
+        <Link to={`${location.pathname}/edit`}>
           <ButtonPropped xpadding={1.2} ypadding={1.5} width={10} text={'EDIT'} />
         </Link>
       </Name>

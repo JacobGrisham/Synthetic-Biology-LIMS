@@ -31,7 +31,7 @@ const Job = () => {
     <Layout>
       <Buttons>
         <ButtonPropped xpadding={1.2} ypadding={1.5} width={10} primary text={'START JOB'} />
-        <Link to={`${location.pathname}/Certify`}>
+        <Link to={`${location.pathname}/certify`}>
           <ButtonPropped xpadding={1.2} ypadding={1.5} width={10} text={'CERTIFY JOB'} />
         </Link>
       </Buttons>

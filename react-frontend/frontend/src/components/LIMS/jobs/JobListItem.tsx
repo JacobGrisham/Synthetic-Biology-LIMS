@@ -19,7 +19,7 @@ const JobListItem = () => {
 
   return (
     <ListItem>
-      <Link to={`${location.pathname}/Job`}>
+      <Link to={`${location.pathname}/job`}>
         <ButtonPropped xpadding={1} ypadding={1.5} width={10} primary text={'VIEW JOB'} />
       </Link>
       <Typography variant="body1">DNA Synthesis</Typography>
