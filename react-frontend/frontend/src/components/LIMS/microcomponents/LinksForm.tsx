@@ -25,7 +25,7 @@ const LinkList = styled.div `
   gap: 0.5rem 0.5rem;
 
   & > h6 {
-    grid-column: 1 / -1;
+    grid-column: 1 / 2;
   }
 
   & > ul {
@@ -37,6 +37,7 @@ const LinkList = styled.div `
   & > button {
     grid-row: 2 / 3;
     grid-column: 2 / 3;
+    align-self: start;
   }
 
   & li {

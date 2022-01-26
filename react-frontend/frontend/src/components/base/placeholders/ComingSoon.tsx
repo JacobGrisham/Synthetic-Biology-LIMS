@@ -13,7 +13,8 @@ const Layout = styled(CombinedStyledLayout) `
 `
 
 const StyledImage = styled.img `
-  width: 300px;
+  max-width: 300px;
+  max-height: 300px;
 `
 type ComingSoonProps = {
   image?: any;
