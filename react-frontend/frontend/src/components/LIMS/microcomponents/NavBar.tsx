@@ -9,8 +9,9 @@ import { styled  as materialuistyled } from '@mui/material/styles';
 import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
 import Zoom from '@mui/material/Zoom';
 // Constants
-import { routes } from '../../../constants/routes-and-navbar-icons';
-
+import { NavBarIconsNames } from '../../../constants/navbar';
+// Utilities
+import { capitalizeFirstLetter } from '../../../utils/change-letter-case';
 
 const List = styled.ul `
   grid-column: navbar / drawer;
@@ -38,16 +39,6 @@ const ListItem = styled.li<IActiveProp> `
     background-color: rgb(144, 202, 249);
   }
 `
-
-const MUIListItem = styled(ListItemButton)({
-  '&& .Mui-selected, && .Mui-selected:hover': {
-    backgroundColor: 'rgb(144, 202, 249)',
-  },
-  '&& .MuiListItemButton-root:hover && .MuiButtonBase-root:hover': {
-    backgroundColor: 'rgb(144, 202, 249)',
-  },
-  },
-);
 
 const LightTooltip = materialuistyled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -78,24 +69,24 @@ const NavBar: React.FC<INavProps> = (props) => {
   return (
     <nav>
       <List>
-        {routes.map(({icon, name}, index) => (
+        {NavBarIconsNames.map(({icon, name}, index) => (
           <ListItem key={`${name} list item`}>
             <Link to={`${name}`}>
-                <MUIListItem
+                <ListItemButton
                   key={`${name} button`}
                   selected={selectedIndex === index}
                   onClick={(event) => handleListItemClick(event, index)}
                 >
                     <LightTooltip
                       key={`${name} tooltip`}
-                      title={name}
+                      title={capitalizeFirstLetter(name)}
                       placement='right'
                       enterDelay={500}
                       TransitionComponent={Zoom}
                     >
                       <img src={icon} alt={`Link for accessing ${name}`}/>
                     </LightTooltip>
-                </MUIListItem>
+                </ListItemButton>
             </Link>
           </ListItem>
         ))};
