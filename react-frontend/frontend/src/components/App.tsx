@@ -6,8 +6,9 @@
 import React from 'react';
 // React Router
 import { Routes, Route } from "react-router-dom";
+// Material UI
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 // My React Components
-import ErrorBoundary from './base/ErrorBoundary';
 import LIMS from './LIMS/LIMS';
 import Home from './home/Home';
 import Register from './home/Authentication/Register';
@@ -15,7 +16,7 @@ import LogIn from './home/Authentication/LogIn';
 import NotFound from './base/placeholders/Error';
 import NotFoundImage from '../assets/images/404.svg';
 // Constants
-import { routes, nestedRoutes } from '../constants/routes-and-navbar-icons';
+import { AppRoutes } from '../constants/routes';
 // Redux
 // import { AnyAction } from 'redux';
 // import { ThunkDispatch } from 'redux-thunk';
@@ -53,33 +54,40 @@ import { routes, nestedRoutes } from '../constants/routes-and-navbar-icons';
 //   }
 // }
 
+const theme = createTheme({
+  components: {
+    MuiListItemButton: {
+      styleOverrides: {
+        root: {
+          "&.Mui-selected": {
+            backgroundColor: 'rgb(144, 202, 249)'
+          }
+        }
+      }
+    }
+  }
+});
+
 const App = () => {
   return (
-    <ErrorBoundary>
+    <ThemeProvider theme={theme}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="register" element={<Register />} />
         <Route path="login" element={<LogIn />} />
         <Route path="lims" element={<LIMS />}>
-          {routes.map((route, index) => (
+          {AppRoutes.map((route, index) => (
             <Route
               key={index}
               path={route.path}
               element={<route.component />}
               />
             ))}
-          {nestedRoutes.map((route, index) => (
-            <Route
-              key={index}
-              path={route.path}
-              element={<route.component />}
-              />
-            ))}
-            <Route path="*" element={<NotFound image={NotFoundImage}/>} />
+            <Route path="*" element={<NotFound error={'Error 404: Page Not Found'} image={NotFoundImage}/>} />
         </Route>
-        <Route path="*" element={<NotFound image={NotFoundImage}/>} />
+        <Route path="*" element={<NotFound error={'Error 404: Page Not Found'} image={NotFoundImage}/>} />
       </Routes>
-    </ErrorBoundary>
+    </ThemeProvider>
   );
 }
 
