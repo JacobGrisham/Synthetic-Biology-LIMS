@@ -10,7 +10,7 @@ node_modules
 .pnp.js
 
 # React Production
-/build
+react-frontend/frontend/build
 
 # Django Database
 db.sqlite3
