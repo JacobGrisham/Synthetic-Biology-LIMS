@@ -2,7 +2,7 @@ import {
   REQUEST_COMPANIES_PENDING, 
   REQUEST_COMPANIES_SUCCESS, 
   REQUEST_COMPANIES_FAILED
-} from '../../constants/routes-and-navbar-icons.js';
+} from '../../constants/routes.js';
 
 const initialStateCompanies = {
   isPending: false,

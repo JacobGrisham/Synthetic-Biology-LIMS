@@ -1,11 +1,11 @@
 import { Dispatch } from 'redux';
 import { apiCall } from '../../api/api';
-import { API_URL } from '../../constants/routes-and-navbar-icons'
+import { API_URL } from '../../constants/routes'
 import { 
   REQUEST_COMPANIES_PENDING, 
   REQUEST_COMPANIES_SUCCESS, 
   REQUEST_COMPANIES_FAILED
-} from '../../constants/routes-and-navbar-icons.js';
+} from '../../constants/routes.js';
 
 
 // This is a higher order function: a function that returns a function
