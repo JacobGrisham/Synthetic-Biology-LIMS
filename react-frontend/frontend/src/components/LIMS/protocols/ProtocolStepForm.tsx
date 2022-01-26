@@ -70,7 +70,7 @@ const ProtocolStepForm = ({errors, touched}: IProtocolStepProps) => {
 
         <Divider variant="middle" />
 
-        <ProtocolChemicalForm inputoutput="input" />
+        <ProtocolChemicalForm inputoutput="input" errors={errors} touched={touched} />
 
         <Divider variant="middle" />
 
@@ -91,7 +91,7 @@ const ProtocolStepForm = ({errors, touched}: IProtocolStepProps) => {
 
         <Divider variant="middle" />
 
-        <ProtocolChemicalForm inputoutput="output"/>
+        <ProtocolChemicalForm inputoutput="output" errors={errors} touched={touched}/>
       </Box>
     </Layout>
   )

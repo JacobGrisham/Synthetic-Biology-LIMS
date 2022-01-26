@@ -40,24 +40,24 @@ const Info = styled.div `
 `
 
 interface IJobFormValues {
-  barcode: number;
-  freezer: number;
-  shelf: number;
-  box: number;
-  wellPlate: number;
-  inventoryAmount: number;
+  barcode: number | '';
+  freezer: number | '';
+  shelf: number | '';
+  box: number | '';
+  wellPlate: number | '';
+  inventoryAmount: number | '';
   inventoryUnits: string;
   type: string;
 }
 
 const JobForm: React.FC<{}> = () => {
   const initialValues:IJobFormValues = {
-    barcode: 0,
-    freezer: 0,
-    shelf: 0,
-    box: 0,
-    wellPlate: 0,
-    inventoryAmount: 0,
+    barcode: '',
+    freezer: '',
+    shelf: '',
+    box: '',
+    wellPlate: '',
+    inventoryAmount: '',
     inventoryUnits: '',
     type: '',
   };
@@ -80,19 +80,33 @@ const JobForm: React.FC<{}> = () => {
         });
       }}
       >
-      {({ errors, touched }) => (
+      {({ values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur, }) => (
       <Form>
         <InnerLayout>
+
           <Buttons>
               <ButtonPropped type='submit' xpadding={1.2} ypadding={1.5} width={10} primary text={'SAVE AND EXIT'} />
           </Buttons>
+
           <Info>
             <Typography variant="h6" gutterBottom>Product Name</Typography>
             <Typography variant="h6" gutterBottom>Job ID</Typography>
             <Typography variant="h6">Reagant</Typography>
             <Typography variant="h6">7</Typography>
           </Info>
-          <ChemicalForm amountfor='product' errors={errors} touched={touched}/>
+
+          <ChemicalForm 
+            amountfor='product'
+            errors={errors}
+            touched={touched}
+            values={values}
+            handleChange={handleChange}
+            handleBlur={handleBlur}/>
+
         </InnerLayout>
       </Form>
       )}

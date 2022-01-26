@@ -1,13 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Field } from 'formik';
-  import { TextField } from 'formik-mui';
+import { TextField } from 'formik-mui';
 import Units from '../inventory/Units';
 import {ReactComponent as Chemical} from '../../../assets/images/inventory-icon.svg';
-
-type IProtocolChemicalInputFieldProps = {
-  inputoutput: 'input' | 'output';
-}
+// Utilities
+import { capitalizeFirstLetter } from '../../../utils/change-letter-case';
 
 const Amount = styled.div `
   grid-area: Amount;
@@ -39,10 +37,16 @@ const Flex = styled.div `
     }
 `
 
+type IProtocolChemicalInputFieldProps = {
+  inputoutput: 'input' | 'output';
+  touched: any;
+  errors: any;
+}
+
 const ProtocolChemicalInputField = (props: IProtocolChemicalInputFieldProps) => {
-  function capitalizeFirstLetter(string: string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
+  var proppedAmount = `${props.inputoutput}Amount`
+  var proppedName = `${props.inputoutput}Name`
+  var proppedType = `${props.inputoutput}Type`
 
   return (
     <Amount>
@@ -52,30 +56,33 @@ const ProtocolChemicalInputField = (props: IProtocolChemicalInputFieldProps) => 
       <Flex>
         <div>
           <Field 
-            name={`${props.inputoutput}Amount`}
+            name={proppedAmount}
             type="number"
             label={`${capitalizeFirstLetter(props.inputoutput)} Amount`}
             component={TextField}
-            variant="outlined"/>
+            variant="outlined"
+            helperText={props.errors.proppedAmount && props.touched.proppedAmount ? props.errors.proppedAmount : " "}/>
         </div>
         <div>
           <Units unitsfor={`${props.inputoutput}Amount`}/>
         </div>
         <div>
           <Field 
-            name={`${props.inputoutput}Name`}
+            name={proppedName}
             type="text"
             label={`${capitalizeFirstLetter(props.inputoutput)} Name`}
             component={TextField}
-            variant="outlined"/>
+            variant="outlined"
+            helperText={props.errors.proppedName && props.touched.proppedName ? props.errors.proppedName : " "}/>
         </div>
         <div>
           <Field 
-            name={`${props.inputoutput}Type`}
+            name={proppedType}
             type="text"
             label={`${capitalizeFirstLetter(props.inputoutput)} Type`}
             component={TextField}
-            variant="outlined"/>
+            variant="outlined"
+            helperText={props.errors.proppedType && props.touched.proppedType ? props.errors.proppedType : " "}/>
         </div>
       </Flex>
     </Amount>

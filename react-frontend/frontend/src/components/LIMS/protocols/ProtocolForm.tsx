@@ -59,11 +59,11 @@ interface IProtocolFormValues {
   protocolDescription?: string;
   equipment?: string;
   protocolStepInstructions: string;
-  inputAmount?: number;
+  inputAmount?: number | '';
   inputUnits?: string;
   inputName?: string;
   inputType?: string;
-  outputAmount?: number;
+  outputAmount?: number | '';
   outputUnits?: string;
   outputName?: string;
   outputType?: string;
@@ -75,11 +75,11 @@ const ProtocolForm: React.FC<{}> = () => {
     protocolDescription: '',
     equipment: '',
     protocolStepInstructions: '',
-    inputAmount: 0,
+    inputAmount: '',
     inputUnits: '',
     inputName: '',
     inputType: '',
-    outputAmount: 0,
+    outputAmount: '',
     outputUnits: '',
     outputName: '',
     outputType: '',
