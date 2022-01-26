@@ -20,15 +20,17 @@ import IconLink from '../buttons/IconLink';
 import arrowIcon from '../../../assets/images/arrow-icon.svg';
 import addIcon from '../../../assets/images/add-icon.svg';
 import filterIcon from '../../../assets/images/filter-icon.svg';
+// Utilities
+import { capitalizeFirstLetter, removeDashAndCapitalize } from '../../../utils/change-letter-case';
 
 interface INavBarLayoutProps {
-  open: boolean;
+  closed: boolean;
 }
 
 const Layout = styled.section<INavBarLayoutProps> `
   grid-column: drawer / workspace;
   grid-template-rows: 230px 1fr;
-  display: ${(props) => props.open ? 'grid;' : 'none;'}
+  display: ${(props) => props.closed ? 'none;' : 'grid;'}
   max-width: 768px;
   max-height: 100vh;
   background-color: rgb(245, 250, 254);
@@ -43,6 +45,7 @@ const Header = styled.div `
 
 // interface ISubHeaderProps {
 //   display?: string;
+//   and add another grid row to accomodate this
 // }
 
 const TopSubHeader = styled.div `
@@ -50,10 +53,6 @@ const TopSubHeader = styled.div `
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  @media ${device.laptopL} {
-    grid-row: 1 / 2;
-  }
 `
 
 const BottomSubHeader = styled.div `
@@ -61,10 +60,6 @@ const BottomSubHeader = styled.div `
   display: grid;
   grid-template-columns: 1fr max-content;
   column-gap: 1.5rem;
-
-  @media ${device.laptopL} {
-    grid-row: 2 / 3;
-  }
 `
 
 const IconButtons = styled.div `
@@ -86,7 +81,7 @@ const IconButtons = styled.div `
 interface IDrawerProps {
   onSearchChange?: any;
   onHandleClose: Function;
-  drawerToggle: boolean;
+  drawerClose: boolean;
 }
 
 interface LinkRouterProps extends LinkProps {
@@ -102,7 +97,8 @@ const Drawer: React.FC<IDrawerProps> = (props) => {
   const location = useLocation();
   const pathnames = location.pathname.split('/').filter((x, index) => index > 1 && x);
   return (
-    <Layout open={props.drawerToggle ? false : true}>
+    <Layout closed={props.drawerClose ? true : false}>
+      {/* Had to pass state to props in order to work with styled components conditional rendering */}
       <Header>
         <TopSubHeader>
           <Breadcrumbs separator="›" aria-label="breadcrumb">
@@ -112,19 +108,19 @@ const Drawer: React.FC<IDrawerProps> = (props) => {
 
               return last ? (
                 <Typography variant="h5" color="text.primary" key={to}>
-                  {value}
+                  {removeDashAndCapitalize(value)}
                 </Typography>
               ) : (
                 <LinkRouter underline="hover" color="inherit" to={to} key={to}>
                   <Typography variant="h5" key={to}>
-                    {value}
+                    {capitalizeFirstLetter(value)}
                   </Typography>
                 </LinkRouter>
               );
             })}
           </Breadcrumbs>
           <IconButtons>
-            <IconLink to={`${pathnames[0]}/Add`} tooltip={'Add'} src={addIcon} alt={"add icon"} />
+            <IconLink to={`${pathnames[0]}/add`} tooltip={'Add'} src={addIcon} alt={"add icon"} />
             <IconButton onClick={props.onHandleClose} type="button" tooltip={'Close'} src={arrowIcon} alt={"close sidebar icon"} />
           </IconButtons>
         </TopSubHeader>
