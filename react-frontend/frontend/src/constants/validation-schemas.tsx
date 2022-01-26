@@ -11,27 +11,32 @@ export const chemicalValidationSchema = {
     .notRequired(),
   barcode: Yup.number()
     .nullable()
-    .min(0, 'Barcode must be a positive integer')
+    .positive('Barcode must be positive')
+    .integer('Barcode must be an integer')
     .defined('Barcode is required'),
   freezer: Yup.number()
     .nullable()
-    .min(0, 'Freezer location must be a positive integer')
-    .defined('Freezer location is required'),
+    .positive('Freezer location must be positive')
+    .integer('Freezer location must be an integer')
+    .notRequired(),
   shelf: Yup.number()
     .nullable()
-    .min(0, 'Shelf location must be a positive integer')
-    .defined('Shelf location is required'),
+    .positive('Shelf location must be positive')
+    .integer('Shelf location must be an integer')
+    .notRequired(),
   box: Yup.number()
     .nullable()
-    .min(0, 'Box location must be a positive integer')
-    .defined('Box location is required'),
+    .positive('Box location must be positive')
+    .integer('Box location must be an integer')
+    .notRequired(),
   wellPlate: Yup.number()
     .nullable()
-    .min(0, 'Well Plate must be a positive integer')
-    .defined('Well Plate location is required'),
+    .positive('Well Plate must be positive')
+    .integer('Well Plate must be an integer')
+    .notRequired(),
   inventoryAmount: Yup.number()
     .nullable()
-    .min(0, 'Inventory amount must be a positive number')
+    .positive('Inventory amount must be a positive number')
     .defined('Inventory amount is required'),
   inventoryUnits: Yup.string()
     .nullable()
@@ -40,6 +45,10 @@ export const chemicalValidationSchema = {
     .nullable()
     .max(50, 'Chemical or Biological Type must be 50 characters or less')
     .defined('Chemical or Biological Type is required'),
+  stockpileGoal: Yup.number()
+    .nullable()
+    .positive('Stockpile goal must be a positive number')
+    .defined('Stockpile goal is required'),
   internalLink: Yup.string()
     .nullable()
     .max(100, 'Internal Link must be 100 characters or less')
@@ -52,27 +61,22 @@ export const chemicalValidationSchema = {
 
 export const projectValidationSchema = {
   projectName: Yup.string()
-    .default('')
     .nullable()
     .max(50, 'Project Name must be 50 characters or less')
     .defined('Project Name is required'),
   projectDescription: Yup.string()
-    .default('')
     .nullable()
     .max(1000, 'Must be 1000 characters or less')
     .notRequired(),
   protocols: Yup.string()
-    .default('')
     .nullable()
     .max(50, 'Protocol must be 50 characters or less')
     .defined('Protocol is required'),
   internalLink: Yup.string()
-    .default('')
     .nullable()
     .max(100, 'Internal Link must be 100 characters or less')
     .notRequired(),
   externalLink: Yup.string().url()
-    .default('')
     .nullable()
     .max(200, 'External Link must be 200 characters or less')
     .notRequired(),
@@ -80,60 +84,48 @@ export const projectValidationSchema = {
 
 export const protocolValidationSchema = {
   protocolName: Yup.string()
-    .default('')
     .nullable()
     .max(50, 'Protocol Name must be 50 characters or less')
     .defined('Protocol Name is required'),
   protocolDescription: Yup.string()
-    .default('')
     .nullable()
     .max(1000, 'Protocol Description must be 1000 characters or less')
     .notRequired(),
   equipment: Yup.string()
-    .default('')
     .nullable()
     .max(50, 'Equipment Name must be 50 characters or less')
     .notRequired(),
   protocolStepInstructions: Yup.string()
-    .default('')
     .nullable()
     .max(1000, 'Protocol Step Instructions must be 1000 characters or less')
     .defined('Protocol Step is required'),
   inputAmount: Yup.number()
-    .default(0)
     .nullable()
-    .min(0, 'Input Amount must be a positive number')
+    .positive('Input Amount must be a positive number')
     .notRequired(),
   inputUnits: Yup.string()
-    .default('')
     .nullable()
     .notRequired(),
   inputName: Yup.string()
-    .default('')
     .nullable()
     .max(50, 'Input Name must be 50 characters or less')
     .notRequired(),
   inputType: Yup.string()
-    .default('')
     .nullable()
     .max(50, 'Input Type must be 50 characters or less')
     .notRequired(),
   outputAmount: Yup.number()
-    .default(0)
     .nullable()
-    .min(0, 'Output Amount must be a positive number')
+    .positive('Output Amount must be a positive number')
     .notRequired(),
   outputUnits: Yup.string()
-    .default('')
     .nullable()
     .notRequired(),
   outputName: Yup.string()
-    .default('')
     .nullable()
     .max(50, 'Output Name must be 50 characters or less')
     .notRequired(),
   outputType: Yup.string()
-    .default('')
     .nullable()
     .max(50, 'Output Type must be 50 characters or less')
     .notRequired(),
