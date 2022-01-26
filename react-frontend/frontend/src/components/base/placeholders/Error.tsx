@@ -16,14 +16,18 @@ const StyledImage = styled.img `
   width: 300px;
 `
 type ErrorProps = {
-  image?: any;
+  image: string;
+  error?: any;
+  errorInfo?: any;
 }
 
 export default function Error(props:ErrorProps) {
   return (
     <Layout>
-      <Typography variant="h6" gutterBottom>Error</Typography>
+      <Typography component="h1" variant="h4" gutterBottom>React Render Error</Typography>
       <StyledImage src={props.image}></StyledImage>
+      <Typography component="h2" variant="h5" gutterBottom>{props.error}</Typography>
+      <Typography variant="body1" gutterBottom>{props.errorInfo}</Typography>
     </Layout>
   )
 }

@@ -4,7 +4,8 @@ import ServerErrorImage from '../../assets/images/500.svg';
 
 // Typescript was throwing errors when I separated the props and the state
 interface IPropsState {
-  hasError: boolean;
+  error?: any;
+  errorInfo?: any;
   children?: JSX.Element;
 }
 
@@ -14,15 +15,16 @@ export default class ErrorBoundary extends Component<{},any> {
   constructor(props: IPropsState){
     super(props);
     this.state = {
-      hasError: false,
+      error: '',
+      errorInfo: ''
     }
   }
 
-  componentDidCatch() {
-    this.setState({ hasError: true })
+  componentDidCatch(error:any, errorInfo:any) {
+    this.setState({ error: error, errorInfo: errorInfo })
   }
 
   render() {
-    return this.state.hasError ? <ServerError image={ServerErrorImage}/> : this.props.children
+    return this.state.error ? <ServerError error={this.state.error} errorInfo={this.state.errorInfo} image={ServerErrorImage}/> : this.props.children
   }
 }
