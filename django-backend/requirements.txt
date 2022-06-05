@@ -1,7 +1,7 @@
 django_environ==0.4.5
 Django==3.2.5
 djangorestframework==3.12.4
-django-cors-headers==3.7.0
+django-cors-headers==3.13.0
 psycopg2-binary==2.9.1
 pytest-django==4.4.0
 pytest-html==3.1.1
